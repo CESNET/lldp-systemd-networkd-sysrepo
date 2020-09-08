@@ -10,6 +10,7 @@
 #include <map>
 #include <spdlog/fmt/ostr.h> // allow spdlog to use operator<<(ostream, NeighbourEntry)
 #include <string>
+#include <systemd/sd-lldp.h>
 #include <vector>
 
 namespace lldp::lldp {
@@ -24,6 +25,10 @@ std::ostream& operator<<(std::ostream& os, const NeighbourEntry& entry);
 class LLDPDataProvider {
 public:
     std::vector<NeighbourEntry> getNeighbours() const;
+
+private:
+    static std::vector<std::pair<int, std::string>> listLinks();
+    static bool nextNeighbour(FILE* f, sd_lldp_neighbor** ret);
 };
 
 } /* namespace lldp::lldp */
