@@ -1,17 +1,17 @@
 #include <sysrepo-cpp/Connection.hpp>
-#include "callback.h"
-#include "LLDP.h"
-
 #include "doctest_integration.h"
+#include "callback.h"
 #include "test_log_setup.h"
 #include "test_sysrepo_helpers.h"
+#include "LLDP.h"
 
 TEST_CASE("Connection")
 {
     TEST_INIT_LOGS;
     TEST_INIT_SYSREPO;
 
-    auto lldp = std::make_shared<lldp::lldp::LLDPDataProvider>();
+    auto conn = sdbus::createSystemBusConnection();
+    auto lldp = std::make_shared<lldp::lldp::LLDPDataProvider>("/run/systemd/netif/lldp", *conn);
     srSubs->dp_get_items_subscribe("/czechlight-lldp:nbr-list", std::make_shared<lldp::sysrepo::Callback>(lldp));
 
     REQUIRE(dataFromSysrepo(clSess, "/czechlight-lldp:nbr-list") == std::map<std::string, std::string> {
