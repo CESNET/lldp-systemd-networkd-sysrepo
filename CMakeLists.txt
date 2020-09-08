@@ -46,8 +46,20 @@ prepare_git_version(LLDP-SYSTEMD-NETWORKD-SYSREPO_VERSION "0.0")
 
 # Find dependencies
 find_package(spdlog REQUIRED)
+find_package(sdbus-c++ REQUIRED)
 find_package(PkgConfig)
 pkg_check_modules(SYSREPO REQUIRED libSysrepo-cpp>=0.7.3 IMPORTED_TARGET libsysrepo) # we're using both C++ and C APIs
+pkg_check_modules(SYSTEMD REQUIRED IMPORTED_TARGET libsystemd)
+
+find_path(SD_LLDP_H systemd/sd-lldp.h PATHS ${SYSTEMD_INCLUDEDIR} NO_DEFAULT_PATH)
+if(NOT SD_LLDP_H)
+    message(FATAL_ERROR "Cannot find required header <systemd/sd-lldp.h>, use https://github.com/systemd/systemd/pull/16744")
+endif()
+if(CMAKE_CXX_FLAGS MATCHES "-stdlib=libc\\+\\+" AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0)
+    SET(STD_FILESYSTEM_LIBRARY c++fs)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1)
+    SET(STD_FILESYSTEM_LIBRARY stdc++fs)
+endif()
 
 # Build and install libraries and executables
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/)
@@ -61,16 +73,14 @@ add_library(sysrepo-lldp STATIC
         src/logging.h
         )
 target_link_libraries(sysrepo-lldp
-        PUBLIC spdlog::spdlog
-        PRIVATE PkgConfig::SYSREPO
-)
+        PUBLIC spdlog::spdlog SDBusCpp::sdbus-c++ PkgConfig::SYSREPO PkgConfig::SYSTEMD ${STD_FILESYSTEM_LIBRARY}
+        )
 
 add_executable(lldp-systemd-networkd-sysrepod
         src/main.cpp
         )
 target_link_libraries(lldp-systemd-networkd-sysrepod
         PUBLIC sysrepo-lldp
-        PRIVATE PkgConfig::SYSREPO
         )
 
 install(TARGETS
@@ -80,10 +90,19 @@ install(TARGETS
 # Testing
 include(CTest)
 if(BUILD_TESTING)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/tests/configure.cmake.h.in
+                   ${CMAKE_CURRENT_BINARY_DIR}/configure.cmake.h)
+
     find_program(SYSREPOCTL sysrepoctl)
     find_program(SYSREPOCFG sysrepocfg)
 
     find_package(doctest 2.3.1 REQUIRED)
+
+    add_library(DbusMock STATIC
+            tests/dbus-helpers/dbus_server.cpp
+            tests/dbus-helpers/dbus_server.h
+            )
+    target_link_libraries(DbusMock PUBLIC SDBusCpp::sdbus-c++)
 
     add_library(DoctestIntegration STATIC
             tests/doctest_integration.cpp
@@ -116,11 +135,10 @@ if(BUILD_TESTING)
     function(lldp_test fname)
         add_executable(test_${fname} tests/${fname}.cpp)
         target_link_libraries(test_${fname}
-                PUBLIC sysrepo-lldp DoctestIntegration
-                PRIVATE PkgConfig::SYSREPO
+                PUBLIC sysrepo-lldp DoctestIntegration DbusMock
                 )
         target_include_directories(test_${fname}
-                PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/tests/ ${CMAKE_CURRENT_SOURCE_DIR}/src/
+                PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/tests/ ${CMAKE_CURRENT_SOURCE_DIR}/src/ ${CMAKE_CURRENT_BINARY_DIR}
                 PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
                 )
 
@@ -136,6 +154,8 @@ if(BUILD_TESTING)
             PROPERTIES FIXTURES_REQUIRED sysrepo:env:sysrepo
             RESOURCE_LOCK sysrepo
     )
+
+    lldp_test(lldp-systemd)
 endif()
 
 find_package(Doxygen)
