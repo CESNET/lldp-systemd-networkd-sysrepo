@@ -3,7 +3,7 @@
 Use information obtained from
 [`systemd-networkd`](https://www.freedesktop.org/software/systemd/man/systemd.network.html)'s
 LLDP support, and publish that via [sysrepo](https://www.sysrepo.org/) as a YANG model.
-Assumes an already-configured `systemd-networkd`, like this:
+Assumes [patched](https://github.com/systemd/systemd/pull/16744) an already-configured `systemd-networkd`, like this:
 
 ```ini
 [Match]
