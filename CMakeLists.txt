@@ -46,8 +46,10 @@ prepare_git_version(LLDP-SYSTEMD-NETWORKD-SYSREPO_VERSION "0.0")
 
 # Find dependencies
 find_package(spdlog REQUIRED)
+find_package(sdbus-c++ REQUIRED)
 find_package(PkgConfig)
 pkg_check_modules(SYSREPO REQUIRED libSysrepo-cpp>=0.7.3 IMPORTED_TARGET libsysrepo) # we're using both C++ and C APIs
+pkg_check_modules(SYSTEMD REQUIRED IMPORTED_TARGET libsystemd)
 
 # Build and install libraries and executables
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/)
@@ -61,16 +63,16 @@ add_library(sysrepo-lldp STATIC
         src/logging.h
         )
 target_link_libraries(sysrepo-lldp
-        PUBLIC spdlog::spdlog
-        PRIVATE PkgConfig::SYSREPO
-)
+        PUBLIC spdlog::spdlog SDBusCpp::sdbus-c++
+        PRIVATE PkgConfig::SYSREPO PkgConfig::SYSTEMD
+        )
 
 add_executable(lldp-systemd-networkd-sysrepod
         src/main.cpp
         )
 target_link_libraries(lldp-systemd-networkd-sysrepod
         PUBLIC sysrepo-lldp
-        PRIVATE PkgConfig::SYSREPO
+        PRIVATE PkgConfig::SYSREPO PkgConfig::SYSTEMD
         )
 
 install(TARGETS
@@ -138,6 +140,8 @@ if(BUILD_TESTING)
             PROPERTIES FIXTURES_REQUIRED sysrepo:env:sysrepo
             RESOURCE_LOCK sysrepo
     )
+
+    lldp_test(lldp-systemd)
 endif()
 
 find_package(Doxygen)
