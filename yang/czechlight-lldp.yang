@@ -16,7 +16,9 @@ module czechlight-lldp {
 
   organization "CESNET";
   contact "photonic@cesnet.cz";
-  description "LLDP neighbours";
+  description
+    "Model for listing neighbours discovered via LLDP protocol.
+     Based on OpenROADM's org-openroadm-lldp@2020-05-29 model.";
 
   revision 2020-08-25 {
     description "Initial release";
