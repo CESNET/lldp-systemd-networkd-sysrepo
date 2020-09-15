@@ -10,6 +10,7 @@
 #include <doctest/doctest.h>
 #include <map>
 #include <sstream>
+#include "lldp/LLDP.h"
 
 namespace doctest {
 
@@ -37,4 +38,24 @@ struct StringMaker<std::map<std::string, std::string>> {
     }
 };
 
+}
+
+namespace trompeloeil {
+template <>
+void print(std::ostream& os, const lldp::lldp::NeighbourEntry& e)
+{
+    os << "lldp::lldp::NeighbourEntry{" << e.m_portId << ", " << e.m_remotePortId << "}" << std::endl;
+}
+}
+
+namespace doctest {
+template <>
+struct StringMaker<lldp::lldp::NeighbourEntry> {
+    static String convert(const lldp::lldp::NeighbourEntry& value)
+    {
+        std::ostringstream ss;
+        trompeloeil::print(ss, value);
+        return ss.str().c_str();
+    }
+};
 }

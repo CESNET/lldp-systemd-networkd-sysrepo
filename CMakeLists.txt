@@ -52,6 +52,22 @@ pkg_check_modules(SYSREPO REQUIRED libSysrepo-cpp>=0.7.3 IMPORTED_TARGET libsysr
 # Build and install libraries and executables
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/)
 
+add_library(lldp STATIC
+        src/lldp/LLDP.cpp
+        src/lldp/LLDP.h
+        )
+
+add_library(sysrepo-integration STATIC
+        src/sysrepo/Daemon.cpp
+        src/sysrepo/Daemon.h
+        src/sysrepo/Logging.cpp
+        src/sysrepo/Logging.h
+        )
+target_link_libraries(sysrepo-integration
+        PUBLIC log-utils
+        PRIVATE PkgConfig::SYSREPO
+)
+
 add_library(log-utils STATIC
         src/utils/log.cpp
         src/utils/log.h
@@ -62,6 +78,7 @@ add_executable(lldp-systemd-networkd-sysrepod
         src/main.cpp
         )
 target_link_libraries(lldp-systemd-networkd-sysrepod
+        PUBLIC sysrepo-integration
         PRIVATE PkgConfig::SYSREPO
         )
 
@@ -80,6 +97,7 @@ if(BUILD_TESTING)
 
     add_library(DoctestIntegration STATIC
             tests/doctest_integration.cpp
+            tests/fake.h
             tests/pretty_printers.h
             tests/test_log_setup.h
             tests/trompeloeil_doctest.h
@@ -109,7 +127,7 @@ if(BUILD_TESTING)
     function(lldp_test fname)
         add_executable(test_${fname} tests/${fname}.cpp)
         target_link_libraries(test_${fname}
-                PUBLIC sysrepo-integration DoctestIntegration log-utils
+                PUBLIC sysrepo-integration DoctestIntegration log-utils lldp
                 PRIVATE PkgConfig::SYSREPO
                 )
         target_include_directories(test_${fname}
@@ -121,6 +139,14 @@ if(BUILD_TESTING)
             add_test(test_${fname} test_${fname})
         endif()
     endfunction()
+
+    lldp_test(sysrepo-opsdata)
+    sysrepo_fixture_env(sysrepo YANG ${CMAKE_CURRENT_SOURCE_DIR}/yang/czechlight-lldp.yang)
+    set_tests_properties(
+            test_sysrepo-opsdata
+            PROPERTIES FIXTURES_REQUIRED sysrepo:env:sysrepo
+            RESOURCE_LOCK sysrepo
+    )
 endif()
 
 find_package(Doxygen)
