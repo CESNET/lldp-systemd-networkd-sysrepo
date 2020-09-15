@@ -10,6 +10,7 @@
 #include <doctest/doctest.h>
 #include <map>
 #include <sstream>
+#include "lldp/LLDP.h"
 
 namespace doctest {
 
