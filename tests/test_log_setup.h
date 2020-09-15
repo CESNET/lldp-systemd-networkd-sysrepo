@@ -15,4 +15,5 @@
     auto test_logger = std::make_shared<spdlog::sinks::ansicolor_stderr_sink_mt>(); \
     lldp::utils::initLogs(test_logger);                                             \
     spdlog::set_pattern("%S.%e [%t %n %L] %v");                                     \
-    spdlog::set_level(spdlog::level::trace);
+    spdlog::set_level(spdlog::level::trace);                                        \
+    spdlog::get("sysrepo")->set_level(spdlog::level::info);
