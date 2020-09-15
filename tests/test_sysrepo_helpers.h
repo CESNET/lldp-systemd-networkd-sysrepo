@@ -9,6 +9,13 @@
 #include <map>
 #include <sysrepo-cpp/Session.hpp>
 
+#define TEST_INIT_SYSREPO                                                                 \
+    auto srConn = std::make_shared<sysrepo::Connection>("lldp-systemd-networkd-sysrepo"); \
+    auto srSess = std::make_shared<sysrepo::Session>(srConn);                             \
+    auto srSubs = std::make_shared<sysrepo::Subscribe>(srSess);                           \
+    auto clConn = std::make_shared<sysrepo::Connection>("test-client");                   \
+    auto clSess = std::make_shared<sysrepo::Session>(clConn);
+
 /** @short Returns true if str ends with a given suffix */
 bool endsWith(const std::string& str, const std::string& suffix)
 {

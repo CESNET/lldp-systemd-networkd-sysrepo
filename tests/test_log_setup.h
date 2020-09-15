@@ -9,25 +9,12 @@
 
 #include <iostream>
 #include <spdlog/sinks/ansicolor_sink.h>
-#include "sysrepo/Logging.h"
-#include "utils/log.h"
+#include "logging.h"
 
-#define IMPL_TEST_INIT_LOGS_1                                                       \
-    spdlog::drop_all();                                                             \
+#define TEST_INIT_LOGS                                                              \
     auto test_logger = std::make_shared<spdlog::sinks::ansicolor_stderr_sink_mt>(); \
-    lldp::utils::initLogs(test_logger);
-
-#define IMPL_TEST_INIT_LOGS_2                               \
-    spdlog::set_pattern("%S.%e [%t %n %L] %v");             \
-    spdlog::set_level(spdlog::level::trace);                \
-    spdlog::get("sysrepo")->set_level(spdlog::level::info); \
+    lldp::utils::initLogs(test_logger);                                             \
+    spdlog::set_pattern("%S.%e [%t %n %L] %v");                                     \
+    spdlog::set_level(spdlog::level::trace);                                        \
+    spdlog::get("sysrepo")->set_level(spdlog::level::info);                         \
     trompeloeil::stream_tracer tracer {std::cout};
-
-#define TEST_INIT_LOGS    \
-    IMPL_TEST_INIT_LOGS_1 \
-    IMPL_TEST_INIT_LOGS_2
-
-#define TEST_SYSREPO_INIT_LOGS \
-    IMPL_TEST_INIT_LOGS_1      \
-    lldp::sysrepo::initLogs(); \
-    IMPL_TEST_INIT_LOGS_2
