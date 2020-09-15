@@ -53,12 +53,15 @@ pkg_check_modules(SYSREPO REQUIRED libSysrepo-cpp>=0.7.3 IMPORTED_TARGET libsysr
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/)
 
 add_library(sysrepo-lldp STATIC
+        src/callback.cpp
+        src/callback.h
         src/logging.cpp
         src/logging.h
         )
 target_link_libraries(sysrepo-lldp
         PUBLIC spdlog::spdlog
-        )
+        PRIVATE PkgConfig::SYSREPO
+)
 
 add_executable(lldp-systemd-networkd-sysrepod
         src/main.cpp
@@ -123,6 +126,14 @@ if(BUILD_TESTING)
             add_test(test_${fname} test_${fname})
         endif()
     endfunction()
+
+    lldp_test(sysrepo-opsdata)
+    sysrepo_fixture_env(sysrepo YANG ${CMAKE_CURRENT_SOURCE_DIR}/yang/czechlight-lldp.yang)
+    set_tests_properties(
+            test_sysrepo-opsdata
+            PROPERTIES FIXTURES_REQUIRED sysrepo:env:sysrepo
+            RESOURCE_LOCK sysrepo
+    )
 endif()
 
 find_package(Doxygen)
