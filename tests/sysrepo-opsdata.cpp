@@ -1,5 +1,6 @@
 #include <sysrepo-cpp/Connection.hpp>
 #include "callback.h"
+#include "LLDP.h"
 
 #include "doctest_integration.h"
 #include "test_log_setup.h"
@@ -10,7 +11,8 @@ TEST_CASE("Connection")
     TEST_INIT_LOGS;
     TEST_INIT_SYSREPO;
 
-    srSubs->dp_get_items_subscribe("/czechlight-lldp:nbr-list", std::make_shared<lldp::sysrepo::Callback>());
+    auto lldp = std::make_shared<lldp::lldp::LLDPDataProvider>();
+    srSubs->dp_get_items_subscribe("/czechlight-lldp:nbr-list", std::make_shared<lldp::sysrepo::Callback>(lldp));
 
     REQUIRE(dataFromSysrepo(clSess, "/czechlight-lldp:nbr-list") == std::map<std::string, std::string> {
                 {"/if-name[ifName='dummy1']", ""},
