@@ -52,6 +52,15 @@ pkg_check_modules(SYSREPO REQUIRED libSysrepo-cpp>=0.7.3 IMPORTED_TARGET libsysr
 # Build and install libraries and executables
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/)
 
+add_library(lldp STATIC
+        src/lldp/LLDP.cpp
+        src/lldp/LLDP.h
+        src/lldp/NeighbourEntry.cpp
+        src/lldp/NeighbourEntry.h
+        )
+target_link_libraries(lldp
+        PUBLIC log-utils)
+
 add_library(sysrepo-integration STATIC
         src/sysrepo/Daemon.cpp
         src/sysrepo/Daemon.h
@@ -122,7 +131,7 @@ if(BUILD_TESTING)
     function(lldp_test fname)
         add_executable(test_${fname} tests/${fname}.cpp)
         target_link_libraries(test_${fname}
-                PUBLIC sysrepo-integration DoctestIntegration log-utils
+                PUBLIC sysrepo-integration DoctestIntegration log-utils lldp
                 PRIVATE PkgConfig::SYSREPO
                 )
         target_include_directories(test_${fname}
