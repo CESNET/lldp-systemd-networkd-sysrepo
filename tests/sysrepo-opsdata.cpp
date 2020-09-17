@@ -1,5 +1,6 @@
 #include <sysrepo-cpp/Connection.hpp>
 #include "callback.h"
+#include "LLDP.h"
 
 #include "doctest_integration.h"
 #include "test_log_setup.h"
