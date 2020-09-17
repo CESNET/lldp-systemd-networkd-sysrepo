@@ -5,6 +5,7 @@
  *
 */
 
+#include <lldp/LLDP.h>
 #include <sysrepo-cpp/Session.hpp>
 #include <utility>
 #include "sysrepo/Daemon.h"
@@ -14,8 +15,9 @@ namespace lldp::sysrepo {
 
 class OperationalDataCallback : public ::sysrepo::Callback {
 public:
-    explicit OperationalDataCallback()
-        : m_lastRequestId(0)
+    explicit OperationalDataCallback(std::shared_ptr<lldp::LLDPDataProvider> lldpData)
+        : m_lldpData(std::move(lldpData))
+        , m_lastRequestId(0)
     {
     }
 
@@ -23,29 +25,49 @@ public:
     {
         spdlog::get("main")->debug("dp_get_items: XPath {} req {} orig-XPath {}", xpath, request_id, original_xpath);
 
-        // when asking for something in the subtree of THIS request
+        // when asking for something in the subtree of the same request
         if (m_lastRequestId == request_id) {
             spdlog::get("main")->trace(" ops data request already handled");
             return SR_ERR_OK;
         }
         m_lastRequestId = request_id;
 
-        // TODO: Fill vals with data.
+        size_t allocatedVals = 0;
+        auto out = vals->allocate(allocatedVals);
+        size_t valIdx = 0;
+
+        auto filler = [&xpath, &out, &valIdx](const lldp::NeighbourEntry& neighbour, const std::string& key) {
+            if (auto it = neighbour.m_properties.find(key); it != neighbour.m_properties.end()) {
+                out->val(valIdx)->set(
+                    (std::string(xpath) + "/if-name[ifName='" + neighbour.m_portId + "']/" + key).c_str(),
+                    it->second.c_str(),
+                    SR_STRING_T);
+                valIdx += 1;
+            }
+        };
+
+        for (const auto& neighbour : m_lldpData->getNeighbours()) {
+            out = vals->reallocate(allocatedVals += neighbour.m_properties.size());
+
+            filler(neighbour, "remotePortId");
+            filler(neighbour, "remoteSysName");
+        }
 
         return SR_ERR_OK;
     }
 
 private:
+    std::shared_ptr<lldp::LLDPDataProvider> m_lldpData;
     uint64_t m_lastRequestId;
 };
 
-Daemon::Daemon(std::shared_ptr<::sysrepo::Connection> srConnection, const std::string& xpath, const std::string& yangModule, const std::string& yangRevision)
+Daemon::Daemon(std::shared_ptr<::sysrepo::Connection> srConnection, const std::string& xpath, const std::string& yangModule, const std::string& yangRevision, std::shared_ptr<lldp::LLDPDataProvider> lldpData)
     : m_conn(std::move(srConnection))
     , m_session(std::make_shared<::sysrepo::Session>(m_conn))
     , m_subscription(std::make_shared<::sysrepo::Subscribe>(m_session))
 {
     ensureYangModule(yangModule, yangRevision);
-    m_subscription->dp_get_items_subscribe(xpath.c_str(), std::make_shared<OperationalDataCallback>());
+    m_subscription->dp_get_items_subscribe(xpath.c_str(), std::make_shared<OperationalDataCallback>(std::move(lldpData)));
 }
 
 Daemon::~Daemon() = default;
