@@ -55,6 +55,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/)
 add_library(sysrepo-lldp STATIC
         src/callback.cpp
         src/callback.h
+        src/LLDP.cpp
+        src/LLDP.h
         src/logging.cpp
         src/logging.h
         )

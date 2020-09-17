@@ -5,13 +5,15 @@
  *
  */
 
+#include <numeric>
 #include "callback.h"
 #include "logging.h"
 
 namespace lldp::sysrepo {
 
-Callback::Callback()
-    : m_lastRequestId(0)
+Callback::Callback(std::shared_ptr<lldp::LLDPDataProvider> lldp)
+    : m_lldp(std::move(lldp))
+    , m_lastRequestId(0)
 {
 }
 
@@ -26,9 +28,20 @@ int Callback::dp_get_items(const char* xpath, [[maybe_unused]] ::sysrepo::S_Vals
     }
     m_lastRequestId = request_id;
 
-    // TODO: Fill vals with data.
-    auto out = vals->allocate(1);
-    out->val(0)->set("/czechlight-lldp:nbr-list/if-name[ifName='dummy1']/remotePortId", "dummy2", SR_STRING_T);
+    // get number of entries
+    auto neighbors = m_lldp->getNeighbors();
+    size_t allocSize = std::accumulate(neighbors.begin(), neighbors.end(), 0, [](size_t acc, lldp::NeighborEntry elem) { return acc + elem.m_properties.size(); });
+    size_t i = 0;
+    auto out = vals->reallocate(allocSize);
+
+    for (const auto& n : neighbors) {
+        for (const auto& [key, val] : n.m_properties) { // garbage properties in, garbage out
+            out->val(i++)->set(
+                (std::string(xpath) + "/if-name[ifName='" + n.m_portId + "']/" + key).c_str(),
+                val.c_str(),
+                SR_STRING_T);
+        }
+    }
 
     return SR_ERR_OK;
 }

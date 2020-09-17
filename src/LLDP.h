@@ -1,0 +1,29 @@
+/*
+ * Copyright (C) 2020 CESNET, https://photonics.cesnet.cz/
+ *
+ * Written by Tomáš Pecka <tomas.pecka@fit.cvut.cz>
+ *
+ */
+
+#pragma once
+
+#include <map>
+#include <spdlog/fmt/ostr.h> // allow spdlog to use operator<<(ostream, NeighborEntry)
+#include <string>
+#include <vector>
+
+namespace lldp::lldp {
+
+struct NeighborEntry {
+    std::string m_portId;
+    std::map<std::string, std::string> m_properties;
+};
+std::ostream& operator<<(std::ostream& os, const NeighborEntry& entry);
+
+
+class LLDPDataProvider {
+public:
+    std::vector<NeighborEntry> getNeighbors() const;
+};
+
+} /* namespace lldp::lldp */
