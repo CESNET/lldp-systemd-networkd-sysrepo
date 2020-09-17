@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include <functional>
 #include <map>
 #include <memory>
 #include <optional>
@@ -18,6 +17,10 @@ class Session;
 class Subscribe;
 } /* namespace sysrepo */
 
+namespace lldp::lldp {
+class LLDPDataProvider;
+} /* namespace lldp::lldp */
+
 namespace lldp::sysrepo {
 
 class Daemon {
@@ -26,7 +29,7 @@ class Daemon {
     std::shared_ptr<::sysrepo::Subscribe> m_subscription;
 
 public:
-    Daemon(std::shared_ptr<::sysrepo::Connection> srConnection, const std::string& xpath, const std::string& yangModule, const std::string& yangRevision);
+    Daemon(std::shared_ptr<::sysrepo::Connection> srConnection, const std::string& xpath, const std::string& yangModule, const std::string& yangRevision, std::shared_ptr<lldp::LLDPDataProvider> lldpData);
     virtual ~Daemon();
 
 private:
