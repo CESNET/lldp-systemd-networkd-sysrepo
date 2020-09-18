@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4153903f_169027b5",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-18T08:13:10Z",
+      "side": 1,
+      "message": "I would not bother with this. In cla-sysrepo there are typically several optical modules within one box, so it makes debugging easier if one can distinguish about which one gets sent which data, but that\u0027s not the case here in this single-purpose app. Let\u0027s just use spdlog directly.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 54
+      },
+      "revId": "f9bea35b1d107b269cbf3b8f36662ddc6ade83bc",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75508f73_b4a27d1f",
+        "filename": "tests/pretty_printers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-18T08:13:10Z",
+      "side": 1,
+      "message": "Looks like this is not needed, right? There probably won\u0027t be any abstractions between sysrepo and your code, so let\u0027s remove this.",
+      "revId": "f9bea35b1d107b269cbf3b8f36662ddc6ade83bc",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
