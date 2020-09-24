@@ -1,0 +1,255 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81cb9864_6e5bfebb",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "is this expensive? I have not measured anything, just wondering because I don\u0027t see this done in a constructor",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 79
+      },
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28579cf5_b1157e55",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "this description doesn\u0027t match what the code is doing, considering that there\u0027s no open/fopen inside and it\u0027s taking a FILE*",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7afdb59d_b1365d7b",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "I\u0027m not sure how to do it better, but I am not thrilled by this C-ish interface in a C++ project.\n\n- option 1, perhaps too Pythonic: return sd_lldp_neighbor, throw an exception on StopIteration :) when there\u0027s nothing left to read from that file\n- option 2, move that readout of size_t into the caller, so that this function becomes `sd_lldp_neighbor nextNeighbour(FILE* f, const size_t size)`\n- option 3, return std::optional\u003csd_lldp_neighbor\u003e\n- option 4, leave it as-is (but note that it requires you to call an explicit free later on)\n\nHmmm, noting that apparently the C API requires you to call sd_lldp_neighbor_unrefp as a deleter (doh!, I should have noticed), perhaps returning a properly wrapped unique_ptr with a matching dtor would be the way to go here? And just nullptr on error/EOF.",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d61d0f0_e5e99917",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "on Ethernet, jumbo frames can be longer than 9000 bytes, so this looks fishy",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cffb236_4de40b50",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "I think it\u0027s better to use a class which deallocates from its dtor, for example vector. It will get you a continuous range in memory, so it should be possible to pass vec.data() to the sd_lldp_neighbor_from_raw().",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce749fbc_8da6292b",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "this is using the implicit, default logger, which is probably not desirable considering that you put in an extra logger for sysrepo",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 21
+      },
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d43f9f2_c1f4d96c",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "I would prefer this to be a prefix passed to the constructor, so that it\u0027s mockable",
+      "range": {
+        "startLine": 63,
+        "startChar": 35,
+        "endLine": 63,
+        "endChar": 61
+      },
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07d216c6_0996af8d",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "perhaps I\u0027m taking it too far, but what about using dtors here a la https://stackoverflow.com/questions/26360916/using-custom-deleter-with-unique-ptr ? Note the caveats in there.",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "759f8e65_4b46728f",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "My first guess would be that it\u0027s an error if that file doesn\u0027t exist, isn\u0027t it?\n\nIs there a case where that file won\u0027t be present? LLDP configured in systemd-networkd, for example?",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 25
+      },
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "142e3af1_d261eb97",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "I see that networkctl is doing that as well, but it rubs me the wrong way. Just saying.",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 18
+      },
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c7167583_d19598c4",
+        "filename": "src/LLDP.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "Why is this one static and the getNeighbours() not? I would have expected a constructor which gets some parameter like \"where to read from\", e.g., a D-Bus path (or even a D-Bus-like proxy?) for listing interfaces, and a filesystem path for location of the data file.",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd2e8f45_fd7369cf",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "This should use some mocked files for actual LLDP data and a D-Bus interface (?) for interface names. I know you know this, but my comments will be unmarking this as a WIP, so I\u0027m putting that comment here anyway so that I can still remember that next Tuesday.",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aeb2b1f5_86abc5d6",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:23:16Z",
+      "side": 1,
+      "message": "debugging leftover?",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
