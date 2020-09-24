@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8ef5336c_53658796",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-24T15:16:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4153903f_169027b5",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 54
+      },
+      "revId": "f9bea35b1d107b269cbf3b8f36662ddc6ade83bc",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75508f73_b4a27d1f",
         "filename": "tests/pretty_printers.h",
         "patchSetId": 8
@@ -39,6 +63,24 @@
       "revId": "f9bea35b1d107b269cbf3b8f36662ddc6ade83bc",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1921411_c47d8867",
+        "filename": "tests/pretty_printers.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-24T15:16:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75508f73_b4a27d1f",
+      "revId": "f9bea35b1d107b269cbf3b8f36662ddc6ade83bc",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     }
   ]
 }
