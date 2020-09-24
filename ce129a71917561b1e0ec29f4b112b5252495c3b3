@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bb64516_c8041cf3",
+        "filename": "src/sysrepo/Daemon.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T21:48:33Z",
+      "side": 1,
+      "message": "This app will be using just a single YANG model; perhaps this is a bit too generic?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 1
+      },
+      "revId": "ce129a71917561b1e0ec29f4b112b5252495c3b3",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}

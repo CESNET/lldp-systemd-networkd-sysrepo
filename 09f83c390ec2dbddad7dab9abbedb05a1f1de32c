@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5405bdbc_35a1a439",
+        "filename": "tests/sysrepo-opsdata.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T21:48:33Z",
+      "side": 1,
+      "message": "Checking whether a module is installed should probably happen before subscribing a data provider",
+      "revId": "09f83c390ec2dbddad7dab9abbedb05a1f1de32c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
