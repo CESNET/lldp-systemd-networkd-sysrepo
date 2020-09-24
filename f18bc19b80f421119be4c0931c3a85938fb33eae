@@ -16,6 +16,24 @@
       "revId": "f18bc19b80f421119be4c0931c3a85938fb33eae",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d483658b_823976e5",
+        "filename": "yang/czechlight-lldp.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-24T10:30:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dc44ea5_0888eb89",
+      "revId": "f18bc19b80f421119be4c0931c3a85938fb33eae",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     }
   ]
 }
