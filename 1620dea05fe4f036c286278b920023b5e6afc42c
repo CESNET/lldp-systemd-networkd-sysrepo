@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73d9d2a4_d7ef5128",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:18:33Z",
+      "side": 1,
+      "message": "I think this should mention CESNET as either the first copyright holder, or at least as a first item given that\u0027s where the funding is coming from. Also in other files in other commits, but here\u0027s when I noticed that.",
+      "revId": "1620dea05fe4f036c286278b920023b5e6afc42c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad46d8d7_f4df2c90",
+        "filename": "src/LLDP.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:18:33Z",
+      "side": 1,
+      "message": "not sure we need rationale for all includes; I would not bother personally",
+      "range": {
+        "startLine": 11,
+        "startChar": 28,
+        "endLine": 11,
+        "endChar": 87
+      },
+      "revId": "1620dea05fe4f036c286278b920023b5e6afc42c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "931220b7_272bc85d",
+        "filename": "src/LLDP.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-24T22:18:33Z",
+      "side": 1,
+      "message": "nit: systemd uses the other English which says \"neighbor\" instead of \"neighbour\", so perhaps it would be nicer to follow their choice of language here as well. Your project, your call, I\u0027m just calling out this possible inconsistency.",
+      "revId": "1620dea05fe4f036c286278b920023b5e6afc42c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    }
+  ]
+}
