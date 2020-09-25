@@ -76,6 +76,24 @@
     },
     {
       "key": {
+        "uuid": "59562d8a_52738ec1",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-25T07:33:23Z",
+      "side": 1,
+      "message": "This is stolen from systemd\u0027s code.",
+      "parentUuid": "8d61d0f0_e5e99917",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1cffb236_4de40b50",
         "filename": "src/LLDP.cpp",
         "patchSetId": 15
