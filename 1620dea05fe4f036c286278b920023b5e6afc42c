@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "eab9db92_6d6bc9d0",
+        "filename": "src/LLDP.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-25T07:09:00Z",
+      "side": 1,
+      "message": "Not for all, just for this one :-)",
+      "parentUuid": "ad46d8d7_f4df2c90",
+      "range": {
+        "startLine": 11,
+        "startChar": 28,
+        "endLine": 11,
+        "endChar": 87
+      },
+      "revId": "1620dea05fe4f036c286278b920023b5e6afc42c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "931220b7_272bc85d",
         "filename": "src/LLDP.h",
         "patchSetId": 8
@@ -53,6 +77,24 @@
       "writtenOn": "2020-09-24T22:18:33Z",
       "side": 1,
       "message": "nit: systemd uses the other English which says \"neighbor\" instead of \"neighbour\", so perhaps it would be nicer to follow their choice of language here as well. Your project, your call, I\u0027m just calling out this possible inconsistency.",
+      "revId": "1620dea05fe4f036c286278b920023b5e6afc42c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e633455f_359b23f6",
+        "filename": "src/LLDP.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-25T07:09:00Z",
+      "side": 1,
+      "message": "Good point, I have changed that.",
+      "parentUuid": "931220b7_272bc85d",
       "revId": "1620dea05fe4f036c286278b920023b5e6afc42c",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": false
