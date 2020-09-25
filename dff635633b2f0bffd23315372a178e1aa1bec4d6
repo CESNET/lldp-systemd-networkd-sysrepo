@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "16dff704_142ce649",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-25T07:56:32Z",
+      "side": 1,
+      "message": "Might be. It repeatedly opens a dbus connection and looks for a object. No idea how expensive this is (without measuring) but I will move it to the constructor. Doing so certainly does not hurt.",
+      "parentUuid": "81cb9864_6e5bfebb",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 79
+      },
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "28579cf5_b1157e55",
         "filename": "src/LLDP.cpp",
         "patchSetId": 15
@@ -39,6 +63,24 @@
       "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9146bc3d_a053a5a7",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-25T07:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28579cf5_b1157e55",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     },
     {
       "key": {
@@ -108,6 +150,24 @@
       "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8c41a01_76c9bee1",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-25T07:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cffb236_4de40b50",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     },
     {
       "key": {
@@ -185,6 +245,30 @@
       "writtenOn": "2020-09-24T22:23:16Z",
       "side": 1,
       "message": "My first guess would be that it\u0027s an error if that file doesn\u0027t exist, isn\u0027t it?\n\nIs there a case where that file won\u0027t be present? LLDP configured in systemd-networkd, for example?",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 25
+      },
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2364f84f_b8c51681",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-25T07:56:32Z",
+      "side": 1,
+      "message": "This happens when LLDP is not enabled for the given interface. I can (now) list only *all* links, not specifically those that have LLDP enabled. There is neither a \"hasLLDPEnabled\" property on the dbus link interface nor a method that would list active lldp interfaces.\n\nShould I implement one for the systemd? I *think* it would not be that hard.",
+      "parentUuid": "759f8e65_4b46728f",
       "range": {
         "startLine": 66,
         "startChar": 20,
