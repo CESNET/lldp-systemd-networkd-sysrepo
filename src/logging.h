@@ -14,8 +14,14 @@
   * @short Implementation of initialization of logging
 */
 
+
+namespace spdlog {
+class logger;
+}
+
 namespace lldp::utils {
-
 void initLogs(std::shared_ptr<spdlog::sinks::sink> sink);
-
+bool isJournaldActive();
+std::shared_ptr<spdlog::sinks::sink> create_journald_sink();
+void fatalException [[noreturn]] (std::shared_ptr<spdlog::logger> log, const std::exception& e, const std::string& when);
 } /* namespace lldp::utils */
