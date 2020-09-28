@@ -42,11 +42,12 @@ add_custom_target(lldp-systemd-networkd-sysrepo-version-cmake-ide
         cmake/ProjectGitVersionRunner.cmake
         )
 include(cmake/ProjectGitVersion.cmake)
-prepare_git_version(LLDP-SYSTEMD-NETWORKD-SYSREPO_VERSION "0.0")
+prepare_git_version(LLDP_SYSTEMD_NETWORKD_SYSREPO_VERSION "0.1")
 
 # Find dependencies
 find_package(spdlog REQUIRED)
 find_package(sdbus-c++ REQUIRED)
+find_package(docopt REQUIRED)
 find_package(PkgConfig)
 pkg_check_modules(SYSREPO REQUIRED libSysrepo-cpp>=0.7.3 IMPORTED_TARGET libsysrepo) # we're using both C++ and C APIs
 pkg_check_modules(SYSTEMD REQUIRED IMPORTED_TARGET libsystemd)
@@ -80,8 +81,10 @@ add_executable(lldp-systemd-networkd-sysrepod
         src/main.cpp
         )
 target_link_libraries(lldp-systemd-networkd-sysrepod
-        PUBLIC sysrepo-lldp
+        PUBLIC sysrepo-lldp docopt
         )
+add_dependencies(lldp-systemd-networkd-sysrepod target-LLDP_SYSTEMD_NETWORKD_SYSREPO_VERSION)
+target_include_directories(lldp-systemd-networkd-sysrepod PRIVATE ${PROJECT_BINARY_DIR})
 
 install(TARGETS
         lldp-systemd-networkd-sysrepod
