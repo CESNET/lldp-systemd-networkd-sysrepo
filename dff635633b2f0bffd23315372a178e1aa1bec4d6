@@ -365,6 +365,30 @@
     },
     {
       "key": {
+        "uuid": "d03241f9_ae0225d5",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-29T20:40:36Z",
+      "side": 1,
+      "message": "at the call we agreed that this is a nice idea for a next iteration of that systemd patch",
+      "parentUuid": "2364f84f_b8c51681",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 25
+      },
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "142e3af1_d261eb97",
         "filename": "src/LLDP.cpp",
         "patchSetId": 15

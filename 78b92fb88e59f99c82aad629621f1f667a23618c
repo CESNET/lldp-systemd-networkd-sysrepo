@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9964639_70ee64f5",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-29T20:40:36Z",
+      "side": 1,
+      "message": "there\u0027s a `using` for that type",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 59
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a549bd0d_e01fb060",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-29T20:40:36Z",
+      "side": 1,
+      "message": "I would love to get a TODO here in the code reminding to ask systemd-networkd over D-bus for just those interfaces which are needed, and to change severity to something higher than debug once that happens.\n\nThe code is also still using \"default logger\", whatever it is. I\u0027m quite sure this won\u0027t work with spdlog when you\u0027ve created several loggers.",
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b345a764_2aa8048a",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-29T20:40:36Z",
+      "side": 1,
+      "message": "I think this would be cleaner and more DRYish:\n\n while (auto n \u003d nextNeighbor(ifs)) ...",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 97
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "293abe47_cf409979",
+        "filename": "src/LLDP.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-29T20:40:36Z",
+      "side": 1,
+      "message": "I think that there\u0027s no need for that wrapper of the deleter, is it?\n\n using sd_lldp_neighbor_managed \u003d std::unique_ptr\u003csd_lldp_neighbor, \u0026sd_lldp_neighbor_unrefp\u003e;\n\nAlso, let\u0027s prefer the `using` notation.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 93
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f246aa4_01a44f0d",
+        "filename": "tests/dbus-helpers/dbus_server.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-29T20:40:36Z",
+      "side": 1,
+      "message": "Can this be done with just a lambda or just a method? Having a lambda that wraps a method feels a bit awkward to me. I guess that the reason is probably encapsulation, but this is a test object, let\u0027s cut the boilerplate please.",
+      "range": {
+        "startLine": 11,
+        "startChar": 80,
+        "endLine": 11,
+        "endChar": 112
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d3a30f4_7e2549fc",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-29T20:40:36Z",
+      "side": 1,
+      "message": "nit: can you perhaps name these descriptively, such as \"just-enp0s25\" or \"only-eth0\", etc?",
+      "range": {
+        "startLine": 36,
+        "startChar": 19,
+        "endLine": 36,
+        "endChar": 24
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0bc0746_8f3295c1",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-29T20:40:36Z",
+      "side": 1,
+      "message": "\"empty\", perhaps?",
+      "range": {
+        "startLine": 43,
+        "startChar": 19,
+        "endLine": 43,
+        "endChar": 24
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
