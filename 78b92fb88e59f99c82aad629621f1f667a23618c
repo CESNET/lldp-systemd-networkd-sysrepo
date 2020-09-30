@@ -220,6 +220,30 @@
     },
     {
       "key": {
+        "uuid": "1e281d48_576e5b19",
+        "filename": "src/LLDP.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000056
+      },
+      "writtenOn": "2020-09-30T10:50:26Z",
+      "side": 1,
+      "message": "One small note: not using the custom functor also allows you to keep everything inside the .cpp file. The unique_ptr template argument can be specified as the function type: https://gerrit.cesnet.cz/plugins/gitiles/CzechLight/netconf-cli/+/refs/heads/master/src/yang_access.hpp#57)",
+      "parentUuid": "a590489e_f292c51d",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 93
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5f246aa4_01a44f0d",
         "filename": "tests/dbus-helpers/dbus_server.cpp",
         "patchSetId": 17
