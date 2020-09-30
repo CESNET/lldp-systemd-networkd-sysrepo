@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5cef2c87_7c574990",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-30T09:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9964639_70ee64f5",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 59
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a549bd0d_e01fb060",
         "filename": "src/LLDP.cpp",
         "patchSetId": 17
@@ -60,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "53b1a6ff_bd22369b",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-30T09:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c8b7ee6_2eb0b172",
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b345a764_2aa8048a",
         "filename": "src/LLDP.cpp",
         "patchSetId": 17
@@ -83,6 +125,30 @@
     },
     {
       "key": {
+        "uuid": "65c39334_17cfd0ff",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-30T09:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b345a764_2aa8048a",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 97
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "293abe47_cf409979",
         "filename": "src/LLDP.h",
         "patchSetId": 17
@@ -94,6 +160,30 @@
       "writtenOn": "2020-09-29T20:40:36Z",
       "side": 1,
       "message": "I think that there\u0027s no need for that wrapper of the deleter, is it?\n\n using sd_lldp_neighbor_managed \u003d std::unique_ptr\u003csd_lldp_neighbor, \u0026sd_lldp_neighbor_unrefp\u003e;\n\nAlso, let\u0027s prefer the `using` notation.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 93
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66e6e7e7_0967d8a1",
+        "filename": "src/LLDP.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-30T09:34:10Z",
+      "side": 1,
+      "message": "Using \u0027using\u0027 is done.\n\nI do not think you can pass the *concrete* function into this \"typedef/using\" type specification (https://en.cppreference.com/w/cpp/memory/unique_ptr).\n\nBut you can of course say that the deleter is a ptr to function (of the same type) and then use the *concrete* sd_lldp_neighbor_unrefp function in the constructor.\n\nSay\n using managed \u003d std::unique_ptr\u003csd_lldp_neighbor, (sd_lldp_neighbor*)(sd_lldp_neighbor*)() ;\nand then\n auto ptr \u003d new managed(hi_i_am_a_pointer, \u0026sd_lldp_neighbor_unrefp);\n\nMy approach bypasses that. I could specify a lambda there, but my compiler says this feature is available at C++20.\n\nOr am I wrong?",
+      "parentUuid": "293abe47_cf409979",
       "range": {
         "startLine": 27,
         "startChar": 0,
@@ -129,6 +219,30 @@
     },
     {
       "key": {
+        "uuid": "552ff61d_67f87981",
+        "filename": "tests/dbus-helpers/dbus_server.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-30T09:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f246aa4_01a44f0d",
+      "range": {
+        "startLine": 11,
+        "startChar": 80,
+        "endLine": 11,
+        "endChar": 112
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d3a30f4_7e2549fc",
         "filename": "tests/lldp-systemd.cpp",
         "patchSetId": 17
@@ -152,6 +266,30 @@
     },
     {
       "key": {
+        "uuid": "5b1198cb_abed64aa",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-30T09:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d3a30f4_7e2549fc",
+      "range": {
+        "startLine": 36,
+        "startChar": 19,
+        "endLine": 36,
+        "endChar": 24
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0bc0746_8f3295c1",
         "filename": "tests/lldp-systemd.cpp",
         "patchSetId": 17
@@ -172,6 +310,30 @@
       "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba865fb0_ee7af734",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-09-30T09:34:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0bc0746_8f3295c1",
+      "range": {
+        "startLine": 43,
+        "startChar": 19,
+        "endLine": 43,
+        "endChar": 24
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     }
   ]
 }
