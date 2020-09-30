@@ -196,6 +196,30 @@
     },
     {
       "key": {
+        "uuid": "a590489e_f292c51d",
+        "filename": "src/LLDP.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000056
+      },
+      "writtenOn": "2020-09-30T09:58:35Z",
+      "side": 1,
+      "message": "Yeah, it is unfortunate that when using a free function deleter, the actual function also has to be specified in the constructor. The lambda version only works with C++20, because C++20 allows default-constructible lambdas.\nI\u0027ve had a similar problem in netconf-cli when wrapping libyang pointers. Something similar could be used here:\n\n  template \u003ctypename Type\u003e using ptrDeleter_type \u003d void (*)(Type*);\n  template \u003ctypename Type\u003e const ptrDeleter_type\u003cType\u003e ptrDeleter;\n  template \u003c\u003e const auto ptrDeleter\u003c\u003e \u003d sd_lldp_neighbor;\n  template \u003ctypename Type\u003e\n  auto wrap(Type* ptr)\n  {\n      return std::unique_ptr\u003cType, ptrDeleter_type\u003cType\u003e\u003e{ptr, ptrDeleter\u003cType\u003e};\n  }\n\n\nYou use the wrap function like this:\n  auto wrapped \u003d wrap(hi_i_am_a_pointer);\n\n\nOf course, if you only have `sd_lldp_neighbor`, then all of the template stuff can be removed:\n  auto wrap(sd_lldp_neighbor* ptr)\n  {\n      return std::unique_ptr\u003csd_lldp_neighbor, sd_lldp_neighbor_unrefp\u003e{ptr, sd_lldp_neighbor_unrefp};\n  }\n\nAlternatively, you could just make a bunch of overloads for `wrap`.\nhttps://gerrit.cesnet.cz/plugins/gitiles/CzechLight/netconf-cli/+/refs/heads/master/src/yang_access.cpp#14",
+      "parentUuid": "66e6e7e7_0967d8a1",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 93
+      },
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5f246aa4_01a44f0d",
         "filename": "tests/dbus-helpers/dbus_server.cpp",
         "patchSetId": 17
