@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "1c8b7ee6_2eb0b172",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-09-30T08:57:46Z",
+      "side": 1,
+      "message": "\u003e The code is also still using \"default logger\", whatever it is. I\u0027m quite sure this won\u0027t work with spdlog when you\u0027ve created several loggers.\n\nas you said during today\u0027s call, it\u0027s now using a default logger in the other patch, my bad, I missed that part. The other point stands, though.",
+      "parentUuid": "a549bd0d_e01fb060",
+      "revId": "78b92fb88e59f99c82aad629621f1f667a23618c",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b345a764_2aa8048a",
         "filename": "src/LLDP.cpp",
         "patchSetId": 17
