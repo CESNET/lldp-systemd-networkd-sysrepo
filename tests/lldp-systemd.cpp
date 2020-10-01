@@ -34,7 +34,13 @@ TEST_CASE("Parsing with the mock")
     {
         links = {{1, "lo"}, {2, "enp0s25"}, {3, "wlp3s0"}, {4, "tun0"}, {5, "br-53662f640039"}, {6, "docker0"}, {7, "br-e78120c0adda"}, {8, "ve-image"}};
         dataDir = "single-link";
-        expected = {{"ve-image", {{"remoteSysName", "image"}, {"remotePortId", "host0"}, {"remoteChassisId", "7062a9e41c924ac6942da39c56e6b820"}}}};
+        expected = {{"ve-image", {
+                                     {"remoteSysName", "image"},
+                                     {"remotePortId", "host0"},
+                                     {"remoteChassisId", "7062a9e41c924ac6942da39c56e6b820"},
+                                     {"systemCapabilitiesSupported", "bridge router station-only"},
+                                     {"systemCapabilitiesEnabled", "station-only"},
+                                 }}};
     }
 
     SECTION("No LLDP enabled")

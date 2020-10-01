@@ -12,6 +12,51 @@ namespace lldp::lldp {
 
 namespace impl {
 
+/** @brief LLDP capabilities identifiers ordered by their appearence in YANG schema 'czechlight-lldp' */
+const char* SYSTEM_CAPABILITIES[] = {
+    "other",
+    "repeater",
+    "bridge",
+    "wlan-access-point",
+    "router",
+    "telephone",
+    "docsis-cable-device",
+    "station-only",
+    "cvlan-component",
+    "svlan-component",
+    "two-port-mac-relay",
+};
+
+/** @brief Converts systemd's capabilities bitset to YANG's (named) bits.
+ *
+ * Apparently, libyang's parser requires the bits to be specified as string of names separated by whitespace.
+ * See libyang's src/parser.c (function lyp_parse_value, switch-case LY_TYPE_BITS) and tests/test_sec9_7.c
+ *
+ * The names of individual bits should appear in the order they are defined in the YANG schema. At least that is how
+ * I understand libyang's comment 'identifiers appear ordered by their position' in src/parser.c.
+ * Systemd and our YANG model czechlight-lldp define the bits in the same order so this function does not have to care
+ * about it.
+ */
+std::string toBitsYANG(uint16_t bits)
+{
+    std::string res;
+
+    unsigned idx = 0;
+    while (bits) {
+        if (bits % 2) {
+            if (!res.empty()) {
+                res += " ";
+            }
+            res += SYSTEM_CAPABILITIES[idx];
+        }
+
+        bits /= 2;
+        idx += 1;
+    }
+
+    return res;
+}
+
 /** @brief sd_lldp_neighbor requires deletion by invoking sd_lldp_neighbor_unrefp */
 struct sd_lldp_neighbor_deleter {
     void operator()(sd_lldp_neighbor* e) const
@@ -58,7 +103,6 @@ sd_lldp_neighbor_managed nextNeighbor(std::ifstream& ifs)
 }
 
 } /* namespace impl */
-
 
 LLDPDataProvider::LLDPDataProvider(std::filesystem::path dataDirectory, sdbus::IConnection& dbusConnection, const std::string& dbusNetworkdBus, const std::string& dbusNetworkdObject, const std::string& dbusNetworkdInterface)
     : m_dataDirectory(std::move(dataDirectory))
@@ -114,7 +158,13 @@ std::vector<NeighborEntry> LLDPDataProvider::getNeighbors() const
                 ne.m_properties["remoteMgmtAddress"] = ether_ntoa(addr);
             }
 
-            // TODO: Implement enabled and supported capabilities
+            if (uint16_t cap = 0; sd_lldp_neighbor_get_system_capabilities(n.get(), &cap) >= 0) {
+                ne.m_properties["systemCapabilitiesSupported"] = impl::toBitsYANG(cap);
+            }
+
+            if (uint16_t cap = 0; sd_lldp_neighbor_get_enabled_capabilities(n.get(), &cap) >= 0) {
+                ne.m_properties["systemCapabilitiesEnabled"] = impl::toBitsYANG(cap);
+            }
 
             spdlog::trace("  found neighbor {}", ne);
             res.push_back(ne);
