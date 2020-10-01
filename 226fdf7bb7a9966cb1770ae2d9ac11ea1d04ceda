@@ -22,6 +22,30 @@
       "revId": "226fdf7bb7a9966cb1770ae2d9ac11ea1d04ceda",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b7e17bf_9e2f2840",
+        "filename": "tests/pretty_printers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-01T18:53:33Z",
+      "side": 1,
+      "message": "This code probably belongs to 2957 (I9b6ce8b766ecc908bebc316a1e44610d9403ee88). I have moved it there.\n\noperator\u003c\u003c for NeighborEntry is not enough (https://github.com/onqtam/doctest/blob/master/doc/markdown/stringification.md) you need to define a \"printer\" for std::vector too. I originally wrote the code specifically for vector\u003cNeighborEntry\u003e but while moving it to #2957 I rewrote it to accept arbitrary vector\u003cT\u003e (T must be printable using operator\u003c\u003c).\n\nI will leave this issue open. Resolve if you agree with this solution.",
+      "parentUuid": "083955fa_71d83616",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 2
+      },
+      "revId": "226fdf7bb7a9966cb1770ae2d9ac11ea1d04ceda",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
     }
   ]
 }
