@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5267a05b_269bab7a",
+        "filename": "src/main.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-01T12:32:12Z",
+      "side": 1,
+      "message": "This adds stdin to the set of FDs to wait for. Why not just use an empty set of FDs?",
+      "revId": "76539e1731eaf0b249b75dabc3fbe61562635c95",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
