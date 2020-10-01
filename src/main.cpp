@@ -33,7 +33,7 @@ int main()
         auto dbusClientConnection = sdbus::createSystemBusConnection();
         spdlog::debug("Initialized dbus connection");
 
-        auto lldp = std::make_shared<lldp::lldp::LLDPDataProvider>("/run/systemd/netif/lldp", *dbusClientConnection, "org.freedesktop.network1");
+        auto lldp = std::make_shared<lldp::lldp::LLDPDataProvider>("/run/systemd/netif/lldp", std::move(dbusClientConnection), "org.freedesktop.network1");
         spdlog::debug("Initialized lldp");
 
         subscribe->dp_get_items_subscribe("/czechlight-lldp:nbr-list", std::make_shared<lldp::sysrepo::Callback>(lldp));
