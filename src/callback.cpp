@@ -29,11 +29,14 @@ int Callback::dp_get_items(const char* xpath, [[maybe_unused]] ::sysrepo::S_Vals
     m_lastRequestId = request_id;
 
     // get number of entries
+    spdlog::debug("callback: before getNeighbours");
     auto neighbors = m_lldp->getNeighbors();
+    spdlog::debug("callback: after getNeighbours");
     size_t allocSize = std::accumulate(neighbors.begin(), neighbors.end(), 0, [](size_t acc, lldp::NeighborEntry elem) { return acc + elem.m_properties.size(); });
     size_t i = 0;
     auto out = vals->reallocate(allocSize);
 
+    spdlog::debug("callback: before loop over neighbours");
     for (const auto& n : neighbors) {
         for (const auto& [key, val] : n.m_properties) { // garbage properties in, garbage out
 
