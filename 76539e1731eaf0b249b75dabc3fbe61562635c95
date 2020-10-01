@@ -34,6 +34,24 @@
       "revId": "76539e1731eaf0b249b75dabc3fbe61562635c95",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32c0921c_f707b9c2",
+        "filename": "src/main.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-01T16:19:54Z",
+      "side": 1,
+      "message": "from my `man pselect`:\n\n\u003e Some code calls select() with all three sets empty, nfds zero, and a non-NULL timeout as a fairly portable way to sleep with subsecond precision.\n\niow, just use 0 there.",
+      "parentUuid": "65ff3770_cf84ff43",
+      "revId": "76539e1731eaf0b249b75dabc3fbe61562635c95",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
     }
   ]
 }
