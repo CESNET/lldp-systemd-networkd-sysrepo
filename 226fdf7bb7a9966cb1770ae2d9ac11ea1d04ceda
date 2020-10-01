@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "083955fa_71d83616",
+        "filename": "tests/pretty_printers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-01T16:23:55Z",
+      "side": 1,
+      "message": "Is this related to the \"core\" of this patch? Either way, I would have expected that an operator\u003c\u003c(lldp::NeighborEntry) should be enough, and doctest/trompeloeil should be capable of adding that vector pretty-printing on its own -- right?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 2
+      },
+      "revId": "226fdf7bb7a9966cb1770ae2d9ac11ea1d04ceda",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}

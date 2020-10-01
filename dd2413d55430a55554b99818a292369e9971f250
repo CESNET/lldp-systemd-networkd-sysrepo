@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ac3fa4c_598f3f3a",
+        "filename": "src/callback.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-01T16:23:55Z",
+      "side": 1,
+      "message": "I think this is reasonable. This is not really a generic function, it\u0027s something which very much knows about the structure of the returned data (e.g., it builds the if-name XPath keys a few lines below).\n\nThe other option would be redefining the \"leaf types\" of m_properties to something like variant\u003cstring, set\u003cstring\u003e\u003e, but that sounds a bit too complex for this tiny use case.\n\nSo I\u0027m fine with just removing that comment.",
+      "revId": "dd2413d55430a55554b99818a292369e9971f250",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
