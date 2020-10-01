@@ -22,6 +22,7 @@ TEST_CASE("Parsing with the mock")
     const auto serverBus = "local.pid" + std::to_string(getpid()) + ".org.freedesktop.network1";
     auto dbusServerConnection = sdbus::createSessionBusConnection(serverBus);
     auto dbusClientConnection = sdbus::createSessionBusConnection();
+    dbusServerConnection->enterEventLoopAsync();
 
     std::vector<std::pair<int, std::string>> links;
     std::string dataDir;
@@ -73,12 +74,10 @@ TEST_CASE("Parsing with the mock")
     dbusServer.setLinks(links); // intentionally not mocking DbusMockServer::ListLinks but using explicit set/get pattern so I can avoid an unneccesary dependency on trompeloeil
     dbusServerConnection->enterEventLoopAsync();
 
-    auto lldp = std::make_shared<lldp::lldp::LLDPDataProvider>(std::filesystem::path(CMAKE_CURRENT_SOURCE_DIR "/tests/files/"s) / dataDir, *dbusClientConnection, serverBus);
+    auto lldp = std::make_shared<lldp::lldp::LLDPDataProvider>(std::filesystem::path(CMAKE_CURRENT_SOURCE_DIR "/tests/files/"s) / dataDir, std::move(dbusClientConnection), serverBus);
     auto neighbors = lldp->getNeighbors();
 
     REQUIRE(neighbors == expected);
-
-    dbusServerConnection->leaveEventLoop();
 }
 
 #if LIST_NEIGHBORS_RUN

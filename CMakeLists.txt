@@ -154,8 +154,10 @@ if(BUILD_TESTING)
             PROPERTIES FIXTURES_REQUIRED sysrepo:env:sysrepo
             RESOURCE_LOCK sysrepo
     )
+    set_tests_properties(test_sysrepo-opsdata PROPERTIES TIMEOUT 5)
 
     lldp_test(lldp-systemd)
+    set_tests_properties(test_lldp-systemd PROPERTIES TIMEOUT 5)
 endif()
 
 find_package(Doxygen)

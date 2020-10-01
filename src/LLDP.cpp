@@ -8,6 +8,8 @@
 #include <spdlog/spdlog.h>
 #include "LLDP.h"
 
+using namespace std::chrono_literals;
+
 namespace lldp::lldp {
 
 namespace impl {
@@ -69,13 +71,26 @@ struct sd_lldp_neighbor_deleter {
 };
 using sd_lldp_neighbor_managed = std::unique_ptr<sd_lldp_neighbor, sd_lldp_neighbor_deleter>;
 
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+#define bswap_64_on_be(x) (x)
+#elif __BYTE_ORDER == __BIG_ENDIAN
+#define bswap_64_on_be(x) __bswap_64(x)
+#endif
+
+#undef le64toh
+static inline uint64_t le64toh(uint64_t value)
+{
+    return bswap_64_on_be((uint64_t)value);
+}
+
+
 /* @brief Reads a LLDP neighbour entry from systemd's binary LLDP files.
 *
 * Inspired systemd's networkctl code.
 */
 sd_lldp_neighbor_managed nextNeighbor(std::ifstream& ifs)
 {
-    size_t rawSz; // get neighbour size in bytes
+    uint64_t rawSz; // get neighbour size in bytes
 
     // read neighbor size
     /* Systemd allows the LLDP frame to be at most 4 KiB long. The comment in networkctl.c states that
@@ -89,8 +104,10 @@ sd_lldp_neighbor_managed nextNeighbor(std::ifstream& ifs)
         return nullptr;
     }
 
+    spdlog::debug("rawSz = {}", rawSz);
+
     std::vector<uint8_t> raw;
-    raw.reserve(le64toh(rawSz));
+    raw.resize(le64toh(rawSz));
 
     ifs.read(reinterpret_cast<char*>(raw.data()), 1 * le64toh(rawSz));
     if (static_cast<size_t>(ifs.gcount()) != le64toh(rawSz)) { // typecast is safe here (see std::streamsize)
@@ -107,19 +124,23 @@ sd_lldp_neighbor_managed nextNeighbor(std::ifstream& ifs)
 
 } /* namespace impl */
 
-LLDPDataProvider::LLDPDataProvider(std::filesystem::path dataDirectory, sdbus::IConnection& dbusConnection, const std::string& dbusNetworkdBus)
+LLDPDataProvider::LLDPDataProvider(std::filesystem::path dataDirectory, std::unique_ptr<sdbus::IConnection> dbusConnection, const std::string& dbusNetworkdBus)
     : m_dataDirectory(std::move(dataDirectory))
-    , m_networkdDbusProxy(sdbus::createProxy(dbusConnection, dbusNetworkdBus, impl::systemdNetworkdDbusManagerObjectPath))
+    , m_networkdDbusProxy(sdbus::createProxy(std::move(dbusConnection), dbusNetworkdBus, impl::systemdNetworkdDbusManagerObjectPath))
 {
 }
 
 /* @brief Lists links using networkd dbus interface and returns them as a list of pairs <link_id, link_name>. */
 std::vector<std::pair<int, std::string>> LLDPDataProvider::listLinks() const
 {
+    spdlog::debug("lldp: before list links");
+
     std::vector<sdbus::Struct<int, std::string, sdbus::ObjectPath>> links;
     std::vector<std::pair<int, std::string>> res; // we only want to return pairs (linkId, linkName), we do not need dbus object path
 
-    m_networkdDbusProxy->callMethod("ListLinks").onInterface(impl::systemdNetworkdDbusInterface).storeResultsTo(links);
+    m_networkdDbusProxy->callMethod("ListLinks").withTimeout(1s).onInterface(impl::systemdNetworkdDbusInterface).storeResultsTo(links);
+
+    spdlog::debug("lldp: after list links");
 
     std::transform(links.begin(), links.end(), std::back_inserter(res), [](const auto& e) { return std::make_pair(std::get<0>(e), std::get<1>(e)); });
     return res;

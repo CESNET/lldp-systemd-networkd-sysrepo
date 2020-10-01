@@ -26,7 +26,7 @@ std::ostream& operator<<(std::ostream& os, const NeighborEntry& entry);
 
 class LLDPDataProvider {
 public:
-    LLDPDataProvider(std::filesystem::path dataDirectory, sdbus::IConnection& dbusConnection, const std::string& dbusNetworkdBus);
+    LLDPDataProvider(std::filesystem::path dataDirectory, std::unique_ptr<sdbus::IConnection> dbusConnection, const std::string& dbusNetworkdBus);
     std::vector<NeighborEntry> getNeighbors() const;
 
 private:
