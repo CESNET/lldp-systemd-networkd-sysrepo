@@ -17,4 +17,4 @@
     lldp::utils::initLogs(test_logger);                                             \
     spdlog::set_pattern("%S.%e [%t %n %L] %v");                                     \
     spdlog::set_level(spdlog::level::trace);                                        \
-    spdlog::get("sysrepo")->set_level(spdlog::level::info);
+    spdlog::get("sysrepo")->set_level(spdlog::level::trace);
