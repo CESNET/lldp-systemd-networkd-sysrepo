@@ -52,6 +52,24 @@
       "revId": "76539e1731eaf0b249b75dabc3fbe61562635c95",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0327dc01_13963d49",
+        "filename": "src/main.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-01T18:36:24Z",
+      "side": 1,
+      "message": "Thanks for confirmation, i was checking man 3 instead of man 2.",
+      "parentUuid": "32c0921c_f707b9c2",
+      "revId": "76539e1731eaf0b249b75dabc3fbe61562635c95",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     }
   ]
 }
