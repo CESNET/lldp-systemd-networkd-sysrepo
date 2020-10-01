@@ -16,6 +16,24 @@
       "revId": "76539e1731eaf0b249b75dabc3fbe61562635c95",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65ff3770_cf84ff43",
+        "filename": "src/main.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-01T15:30:05Z",
+      "side": 1,
+      "message": "True, this is a nonsense, I see it now.\n\nI have uploaded PS 7 without FD_SET. I\u0027m not sure though about setting pselect\u0027s parameter nfds to 0.",
+      "parentUuid": "5267a05b_269bab7a",
+      "revId": "76539e1731eaf0b249b75dabc3fbe61562635c95",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
     }
   ]
 }
