@@ -36,7 +36,10 @@ TEST_CASE("Parsing with the mock")
                 {"remoteSysName", "image"},
                 {"remotePortId", "host0"},
                 {"remoteChassisId", "7062a9e41c924ac6942da39c56e6b820"},
-                }}
+                {"systemCapabilitiesSupported", "bridge router station-only"},
+                {"systemCapabilitiesEnabled", "station-only"},
+
+            }}
         };
     }
 
@@ -56,11 +59,15 @@ TEST_CASE("Parsing with the mock")
                               {"remoteSysName", "sw-a1128-01.fit.cvut.cz"},
                               {"remotePortId", "Gi3/0/7"},
                               {"remoteChassisId", "00:b8:b3:e6:17:80"},
+                              {"systemCapabilitiesSupported", "bridge router"},
+                              {"systemCapabilitiesEnabled", "bridge"},
                           }},
             {"ve-image", {
                              {"remoteSysName", "image"},
                              {"remotePortId", "host0"},
                              {"remoteChassisId", "8b90f96f448140fb9b5d9d68e86d052e"},
+                             {"systemCapabilitiesSupported", "bridge router station-only"},
+                             {"systemCapabilitiesEnabled", "station-only"},
                          }},
         };
     }
