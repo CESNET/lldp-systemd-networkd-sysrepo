@@ -8,6 +8,8 @@
 #include <spdlog/spdlog.h>
 #include "LLDP.h"
 
+using namespace std::chrono_literals;
+
 namespace lldp::lldp {
 
 namespace impl {
@@ -116,10 +118,14 @@ LLDPDataProvider::LLDPDataProvider(std::filesystem::path dataDirectory, sdbus::I
 /* @brief Lists links using networkd dbus interface and returns them as a list of pairs <link_id, link_name>. */
 std::vector<std::pair<int, std::string>> LLDPDataProvider::listLinks() const
 {
+    spdlog::debug("lldp: before list links");
+
     std::vector<sdbus::Struct<int, std::string, sdbus::ObjectPath>> links;
     std::vector<std::pair<int, std::string>> res; // we only want to return pairs (linkId, linkName), we do not need dbus object path
 
-    m_networkdDbusProxy->callMethod("ListLinks").onInterface(impl::systemdNetworkdDbusInterface).storeResultsTo(links);
+    m_networkdDbusProxy->callMethod("ListLinks").withTimeout(1s).onInterface(impl::systemdNetworkdDbusInterface).storeResultsTo(links);
+
+    spdlog::debug("lldp: after list links");
 
     std::transform(links.begin(), links.end(), std::back_inserter(res), [](const auto& e) { return std::make_pair(std::get<0>(e), std::get<1>(e)); });
     return res;
