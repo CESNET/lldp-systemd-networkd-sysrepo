@@ -25,6 +25,8 @@ TEST_CASE("Sysrepo opsdata callback")
     auto dbusServer = DbusServer(*dbusServerConnection);
     dbusServer.setLinks({{8, "ve-image"}});
 
+    sleep(5);
+
     REQUIRE(dataFromSysrepo(clSess, "/czechlight-lldp:nbr-list") == std::map<std::string, std::string> {
                 {"/if-name[ifName='ve-image']", ""},
                 {"/if-name[ifName='ve-image']/ifName", "ve-image"},
