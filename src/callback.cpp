@@ -36,10 +36,16 @@ int Callback::dp_get_items(const char* xpath, [[maybe_unused]] ::sysrepo::S_Vals
 
     for (const auto& n : neighbors) {
         for (const auto& [key, val] : n.m_properties) { // garbage properties in, garbage out
+
+            auto srType = SR_STRING_T;
+            if (key == "systemCapabilitiesSupported" || key == "systemCapabilitiesEnabled") {
+                srType = SR_BITS_T;
+            }
+
             out->val(i++)->set(
                 (std::string(xpath) + "/if-name[ifName='" + n.m_portId + "']/" + key).c_str(),
                 val.c_str(),
-                SR_STRING_T);
+                srType);
         }
     }
 
