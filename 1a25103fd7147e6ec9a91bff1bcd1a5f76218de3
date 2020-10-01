@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0302984_b750a7e0",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-01T16:32:03Z",
+      "side": 1,
+      "message": "Would be kinda awesome to just append a runtime-unique string in there instead of keeping in mind that test #1 uses \"1\" and test #2 has a \"2\". Put there a GUID or PID or something, perhaps?\n\nAlso, is it necessary to have both of them unique? My DBus-fu is too low to know that.",
+      "range": {
+        "startLine": 22,
+        "startChar": 22,
+        "endLine": 23,
+        "endChar": 66
+      },
+      "revId": "1a25103fd7147e6ec9a91bff1bcd1a5f76218de3",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "410ad87a_041e7184",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-01T16:32:03Z",
+      "side": 1,
+      "message": "I think that at least the interface can be easily hardcoded to the expected value (because it\u0027s essentially an API contract), not just in both tests, but also in the actual code. IOW, no need to have that customizable.",
+      "revId": "1a25103fd7147e6ec9a91bff1bcd1a5f76218de3",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
