@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "ee43672b_de346da1",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-01T12:19:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "59562d8a_52738ec1",
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cffb236_4de40b50",
         "filename": "src/LLDP.cpp",
         "patchSetId": 15
@@ -410,6 +428,30 @@
       "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4555336_15902613",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-01T12:19:10Z",
+      "side": 1,
+      "message": "the TODO comment is in the code, thanks",
+      "parentUuid": "d03241f9_ae0225d5",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 25
+      },
+      "revId": "dff635633b2f0bffd23315372a178e1aa1bec4d6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     },
     {
       "key": {
