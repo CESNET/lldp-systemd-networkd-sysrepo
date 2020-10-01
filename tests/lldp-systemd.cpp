@@ -77,8 +77,6 @@ TEST_CASE("Parsing with the mock")
     auto neighbors = lldp->getNeighbors();
 
     REQUIRE(neighbors == expected);
-
-    dbusServerConnection->leaveEventLoop();
 }
 
 #if LIST_NEIGHBORS_RUN
