@@ -5,6 +5,8 @@
             requires: CzechLight-deps-f31-gcc
             required-projects: &projects
               - CzechLight/dependencies
+              - name: github/systemd/systemd
+                override-checkout: cesnet/lldp
         - f31-clang-asan-ubsan:
             requires: CzechLight-deps-f31-clang-asan-ubsan
             required-projects: *projects
