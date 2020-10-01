@@ -27,4 +27,17 @@ struct StringMaker<std::map<std::string, std::string>> {
     }
 };
 
+template <>
+struct StringMaker<std::vector<lldp::lldp::NeighborEntry>> {
+    static String convert(const std::vector<lldp::lldp::NeighborEntry>& vec)
+    {
+        std::ostringstream os;
+        os << "[" << std::endl;
+        for (const auto& e : vec) {
+            os << e;
+        }
+        os << "]";
+        return os.str().c_str();
+    }
+};
 }

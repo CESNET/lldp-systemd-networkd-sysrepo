@@ -34,7 +34,8 @@ TEST_CASE("Sysrepo opsdata callback")
                 {"/if-name[ifName='ve-image']/remotePortId", "host0"},
                 {"/if-name[ifName='ve-image']/remoteSysName", "image"},
                 {"/if-name[ifName='ve-image']/remoteChassisId", "7062a9e41c924ac6942da39c56e6b820"},
-
+                {"/if-name[ifName='ve-image']/systemCapabilitiesSupported", "bridge router station-only"},
+                {"/if-name[ifName='ve-image']/systemCapabilitiesEnabled", "station-only"},
             });
 
     dbusServerConnection->leaveEventLoop();
