@@ -70,6 +70,14 @@ fi
 
 curl ${ARTIFACT_URL} | unzstd --stdout | tar -C ${PREFIX} -xf -
 
+# We're using a patched version of systemd which exports the LLDP parsing
+BUILD_SD=~/build-sd
+pushd ${ZUUL_PROJECT_SRC_DIR}/../../github/systemd/systemd
+env -u CC -u CXX -u LD -u CFLAGS -u CXXFLAGS -u LDFLAGS meson ${BUILD_SD}
+ninja-build -C ${BUILD_SD}
+DESTDIR=${PREFIX} ninja-build -C ${BUILD_SD} install
+popd
+
 cd ${BUILD_DIR}
 cmake -GNinja -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE:-Debug} -DCMAKE_INSTALL_PREFIX=${PREFIX} ${CMAKE_OPTIONS} ${ZUUL_PROJECT_SRC_DIR}
 ninja-build
