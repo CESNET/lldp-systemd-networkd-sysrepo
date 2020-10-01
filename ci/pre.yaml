@@ -1,0 +1,10 @@
+- hosts: all
+  tasks:
+    - name: install systemd's build deps
+      dnf:
+        name: '{{ item }}'
+        state: present
+      loop:
+        - meson
+        - gperf
+      become: true
