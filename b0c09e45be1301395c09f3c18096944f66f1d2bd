@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5659282f_0ad5fb44",
+        "filename": "ci/build.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-01T11:59:42Z",
+      "side": 1,
+      "message": "This results in a .pc file which lists the full path to the includes as /usr/include, not ${PREFIX}/include :(. I\u0027ll fix that.",
+      "revId": "b0c09e45be1301395c09f3c18096944f66f1d2bd",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
