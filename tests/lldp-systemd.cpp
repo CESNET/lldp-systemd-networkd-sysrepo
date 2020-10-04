@@ -47,6 +47,28 @@ TEST_CASE("Parsing with the mock")
         expected = {};
     }
 
+    SECTION("Two LLDP links")
+    {
+        links = {{1, "lo"}, {2, "enp0s25"}, {3, "enp0s31f6"}, {4, "ve-image"}};
+        dataDir = "two-links";
+        expected = {
+            {"enp0s31f6", {
+                              {"remoteSysName", "sw-a1128-01.fit.cvut.cz"},
+                              {"remotePortId", "Gi3/0/7"},
+                              {"remoteChassisId", "00:b8:b3:e6:17:80"},
+                              {"systemCapabilitiesSupported", "bridge router"},
+                              {"systemCapabilitiesEnabled", "bridge"},
+                          }},
+            {"ve-image", {
+                             {"remoteSysName", "image"},
+                             {"remotePortId", "host0"},
+                             {"remoteChassisId", "8b90f96f448140fb9b5d9d68e86d052e"},
+                             {"systemCapabilitiesSupported", "bridge router station-only"},
+                             {"systemCapabilitiesEnabled", "station-only"},
+                         }},
+        };
+    }
+
     auto dbusServer = DbusServer(*dbusServerConnection);
     dbusServer.setLinks(links); // intentionally not mocking DbusMockServer::ListLinks but using explicit set/get pattern so I can avoid an unneccesary dependency on trompeloeil
     dbusServerConnection->enterEventLoopAsync();
