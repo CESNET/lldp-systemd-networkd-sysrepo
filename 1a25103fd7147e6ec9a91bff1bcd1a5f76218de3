@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "ec6418f6_60fe4436",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-08T18:03:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a04bbfa5_4080847b",
+      "range": {
+        "startLine": 22,
+        "startChar": 22,
+        "endLine": 23,
+        "endChar": 66
+      },
+      "revId": "1a25103fd7147e6ec9a91bff1bcd1a5f76218de3",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "410ad87a_041e7184",
         "filename": "tests/lldp-systemd.cpp",
         "patchSetId": 24
@@ -87,6 +111,24 @@
       "revId": "1a25103fd7147e6ec9a91bff1bcd1a5f76218de3",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13745f08_9542e491",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-08T18:03:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "410ad87a_041e7184",
+      "revId": "1a25103fd7147e6ec9a91bff1bcd1a5f76218de3",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     }
   ]
 }
