@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f12b62db_a02d8d53",
+        "filename": "src/main.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-08T18:33:58Z",
+      "side": 1,
+      "message": "I noticed now that this connects to local sysrepo only, right?",
+      "revId": "560ea566d92c6b218941fabc5c55684f404cfada",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
