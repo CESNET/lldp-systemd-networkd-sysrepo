@@ -188,6 +188,30 @@
     },
     {
       "key": {
+        "uuid": "bfaae79c_d400277c",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T13:34:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "da2ba7a0_b33819d4",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 85
+      },
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42337722_82df248b",
         "filename": "tests/lldp-systemd.cpp",
         "patchSetId": 32
