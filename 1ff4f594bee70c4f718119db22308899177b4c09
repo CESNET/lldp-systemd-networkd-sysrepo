@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4968957_cf419e1b",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T15:11:57Z",
+      "side": 1,
+      "message": "\"size\"",
+      "range": {
+        "startLine": 47,
+        "startChar": 87,
+        "endLine": 47,
+        "endChar": 101
+      },
+      "revId": "1ff4f594bee70c4f718119db22308899177b4c09",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
