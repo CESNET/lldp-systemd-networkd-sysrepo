@@ -22,6 +22,30 @@
       "revId": "1ff4f594bee70c4f718119db22308899177b4c09",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b875d7d4_a44b538e",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-09T15:24:58Z",
+      "side": 1,
+      "message": ":( Done.",
+      "parentUuid": "b4968957_cf419e1b",
+      "range": {
+        "startLine": 47,
+        "startChar": 87,
+        "endLine": 47,
+        "endChar": 101
+      },
+      "revId": "1ff4f594bee70c4f718119db22308899177b4c09",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     }
   ]
 }
