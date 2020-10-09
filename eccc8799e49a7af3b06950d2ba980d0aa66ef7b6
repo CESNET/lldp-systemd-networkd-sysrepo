@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f5f72c8_62559804",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T11:47:19Z",
+      "side": 1,
+      "message": "Why do you need this instead of just using that function from the standard library? In systemd, they have their own implementation because they wanted to support sparse, a C static checker which has some annotations for alien-endian integer types, but this code is not doing that.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14154234_6fffb110",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T11:47:19Z",
+      "side": 1,
+      "message": "This conversion is present five times in this function. What about something like this:\n\n size_t size;\n\n {\n   uint64_t rawSize;\n   ifs.read(reinterpret_cast\u003cchar*\u003e(\u0026rawSize), sizeof(rawSize));\n   size \u003d le64toh(rawSize);\n   if (size_t rd \u003d ifs.gcount(); (rd \u003d\u003d 0 \u0026\u0026 ifs.eof()) || rd !\u003d sizeof(rawSz) || size \u003e\u003d 4096) {\n       return nullptr;\n   }\n }\n\n std::vector\u003cuint8_t\u003e raw;\n raw.resize(size);\n \n if.read(reinterpret_cast\u003cchar*\u003e(raw.data()), size);\n ...",
+      "range": {
+        "startLine": 54,
+        "startChar": 83,
+        "endLine": 54,
+        "endChar": 97
+      },
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e65497fc_b05a94ae",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T11:47:19Z",
+      "side": 1,
+      "message": "nit: I wanted to start by recommending a bunch of typedefs, because that vector\u003cpair\u003c...\u003e\u003e is repeated three times:\n\n using LinkInfo \u003d std::pair\u003cint, std::string\u003e;\n using Links \u003d std::vector\u003cLinkInfo\u003e;\n\n...but that would clutter up the class\u0027 interface, IMHO. What about making this into a free-standing function like this:\n\n auto listLinks(sdbus::IProxy* proxy)\n {\n     std::vector\u003csdbus::Struct\u003cint, std::string, sdbus::ObjectPath\u003e\u003e links;\n     std::vector\u003cstd::pair\u003cint, std::string\u003e\u003e res; // we only want to return pairs (linkId, linkName), we do not need dbus object path\n\n     proxy-\u003ecallMethod(\"ListLinks\").onInterface(impl::systemdNetworkdDbusInterface).storeResultsTo(links);\n\n     std::transform(links.begin(), links.end(), std::back_inserter(res), [](const auto\u0026 e) { return std::make_pair(std::get\u003c0\u003e(e), std::get\u003c1\u003e(e)); });\n    return res;\n }\n\nand change the caller in getNeighbors() to:\n\n  listLinks(m_networkDbusProxy)",
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a470e1af_64edb685",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T11:47:19Z",
+      "side": 1,
+      "message": "nit: consider making it less verbose, just:\n\n  spdlog::debug(\" failed to open {}\", lldpFilename);",
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be82d1b9_69ec22b2",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T11:47:19Z",
+      "side": 1,
+      "message": "I just quickly glanced through D-Bus docs, and they have \"unique connection names\" which start with a \":\", are unique per each connection, and which look like something that can be used instead of these well-known bus names. Is it possible to do that, or not really? Just let me know here please.",
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e497232_60f2b72f",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T11:47:19Z",
+      "side": 1,
+      "message": "nit: this indentation looks a bit excessive to me",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 85
+      },
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42337722_82df248b",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T11:47:19Z",
+      "side": 1,
+      "message": "indeed, I like this",
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    }
+  ]
+}
