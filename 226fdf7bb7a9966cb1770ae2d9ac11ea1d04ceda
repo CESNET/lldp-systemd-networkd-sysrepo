@@ -46,6 +46,30 @@
       "revId": "226fdf7bb7a9966cb1770ae2d9ac11ea1d04ceda",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50960042_6d80e0ab",
+        "filename": "tests/pretty_printers.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T11:55:17Z",
+      "side": 1,
+      "message": "Thanks (I think I got confused because the other project reuses trompeloeil\u0027s pretty printers which might have some default for a variant\u003ct\u003e?).",
+      "parentUuid": "3b7e17bf_9e2f2840",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 2
+      },
+      "revId": "226fdf7bb7a9966cb1770ae2d9ac11ea1d04ceda",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     }
   ]
 }
