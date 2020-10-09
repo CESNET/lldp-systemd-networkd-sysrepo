@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "b8784c6d_63d70e75",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-09T15:02:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14154234_6fffb110",
+      "range": {
+        "startLine": 54,
+        "startChar": 83,
+        "endLine": 54,
+        "endChar": 97
+      },
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e65497fc_b05a94ae",
         "filename": "src/LLDP.cpp",
         "patchSetId": 32
@@ -86,6 +110,24 @@
       "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18672ae0_533d0ff5",
+        "filename": "src/LLDP.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-09T15:02:35Z",
+      "side": 1,
+      "message": "I agree that listLinks does not need to be a method in the LLDP class. So I moved it into impl namespace.\nBut doing that because of the three occurrences of std::vector\u003cstd::pair\u003cX,Y\u003e\u003e seems a little unnecesary to me :-)",
+      "parentUuid": "e65497fc_b05a94ae",
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     },
     {
       "key": {
@@ -135,6 +177,24 @@
       "writtenOn": "2020-10-09T11:47:19Z",
       "side": 1,
       "message": "I just quickly glanced through D-Bus docs, and they have \"unique connection names\" which start with a \":\", are unique per each connection, and which look like something that can be used instead of these well-known bus names. Is it possible to do that, or not really? Just let me know here please.",
+      "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67e98457_9770d92b",
+        "filename": "tests/lldp-systemd.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-09T15:02:35Z",
+      "side": 1,
+      "message": "Yes, every connection has such a name (e.g. \u0027:1:345\u0027) and it can possibly have the string name (e.g. \u0027org.freedesktop.systemd\u0027). Even the client\u0027s connection has the unique name.\n\nSdbus-c++\u0027s IConnection interface offers a method for retrieving the unique name:         IConnection::getUniqueName(). So yes, this might indeed work. I will try it locally before sending a new PS.",
+      "parentUuid": "be82d1b9_69ec22b2",
       "revId": "eccc8799e49a7af3b06950d2ba980d0aa66ef7b6",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
