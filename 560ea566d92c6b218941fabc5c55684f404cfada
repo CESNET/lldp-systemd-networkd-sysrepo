@@ -16,6 +16,24 @@
       "revId": "560ea566d92c6b218941fabc5c55684f404cfada",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3fac937_7a5e5da7",
+        "filename": "src/main.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-09T08:36:18Z",
+      "side": 1,
+      "message": "this needs something like SR_DAEMON_ONLY",
+      "parentUuid": "f12b62db_a02d8d53",
+      "revId": "560ea566d92c6b218941fabc5c55684f404cfada",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
     }
   ]
 }
