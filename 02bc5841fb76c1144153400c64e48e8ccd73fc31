@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6679230_d8da1a11",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-15T19:31:57Z",
+      "side": 1,
+      "message": "consider splitting this into one item per line",
+      "revId": "02bc5841fb76c1144153400c64e48e8ccd73fc31",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
