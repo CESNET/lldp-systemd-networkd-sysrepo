@@ -90,6 +90,13 @@ install(TARGETS
         lldp-systemd-networkd-sysrepod
         RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/)
 
+install(FILES
+        yang/czechlight-lldp.yang
+        yang/iana-afn-safi@2013-07-04.yang
+        yang/ietf-inet-types@2013-07-15.yang
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/share/lldp-systemd-networkd-sysrepo/yang
+        )
+
 # Testing
 include(CTest)
 if(BUILD_TESTING)
