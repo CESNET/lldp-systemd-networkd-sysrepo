@@ -1,0 +1,8 @@
+Verified+1: CzechLight CI <cesnet-zuul+czechlight@gerrit.cesnet.cz>
+Verified+1: Zuul CI <cesnet-zuul+public@gerrit.cesnet.cz>
+Code-Review+2: Jan Kundrát <jan.kundrat@cesnet.cz>
+Submitted-by: Jan Kundrát <jan.kundrat@cesnet.cz>
+Submitted-at: Thu, 15 Oct 2020 21:31:12 +0200
+Reviewed-on: https://gerrit.cesnet.cz/c/CzechLight/lldp-systemd-networkd-sysrepo/+/3054
+Project: CzechLight/lldp-systemd-networkd-sysrepo
+Branch: refs/heads/master
