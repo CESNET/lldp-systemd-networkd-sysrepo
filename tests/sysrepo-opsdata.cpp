@@ -19,11 +19,12 @@ TEST_CASE("Sysrepo opsdata callback")
     dbusServerConnection->enterEventLoopAsync();
 
     auto lldp = std::make_shared<lldp::lldp::LLDPDataProvider>(CMAKE_CURRENT_SOURCE_DIR "/tests/files/single-link", sdbus::createSessionBusConnection(), serverBus);
-    srSubs->dp_get_items_subscribe("/czechlight-lldp:nbr-list", std::make_shared<lldp::sysrepo::Callback>(lldp));
+    srSubs->oper_get_items_subscribe("czechlight-lldp", lldp::sysrepo::Callback(lldp), "/czechlight-lldp:nbr-list");
 
     auto dbusServer = DbusServer(*dbusServerConnection);
     dbusServer.setLinks({{8, "ve-image"}});
 
+    clSess->session_switch_ds(SR_DS_OPERATIONAL);
     REQUIRE(dataFromSysrepo(clSess, "/czechlight-lldp:nbr-list") == std::map<std::string, std::string> {
                 {"/if-name[ifName='ve-image']", ""},
                 {"/if-name[ifName='ve-image']/ifName", "ve-image"},

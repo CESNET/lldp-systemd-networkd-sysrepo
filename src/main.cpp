@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
     spdlog::get("sysrepo")->set_level(parseLogLevel("Sysrepo library", args["--sysrepo-log-level"]));
 
     try {
-        sysrepo::S_Connection conn(new sysrepo::Connection("lldp-systemd-networkd-sysrepo", SR_CONN_DAEMON_REQUIRED));
+        sysrepo::S_Connection conn(new sysrepo::Connection());
         sysrepo::S_Session sess(new sysrepo::Session(conn));
         sysrepo::S_Subscribe subscribe(new sysrepo::Subscribe(sess));
         spdlog::debug("Initialized sysrepo connection");
@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
         auto lldp = std::make_shared<lldp::lldp::LLDPDataProvider>("/run/systemd/netif/lldp", std::move(dbusClientConnection), "org.freedesktop.network1");
         spdlog::debug("Initialized lldp");
 
-        subscribe->dp_get_items_subscribe("/czechlight-lldp:nbr-list", std::make_shared<lldp::sysrepo::Callback>(lldp));
+        subscribe->oper_get_items_subscribe("czechlight-lldp", lldp::sysrepo::Callback(lldp), "/czechlight-lldp:nbr-list");
         spdlog::debug("Initialized sysrepo callback");
         spdlog::info("Started");
 
