@@ -39,8 +39,9 @@ fi
   YANG_DIR=$(dirname "${YANG_FILE}")
 
   if [[ "${MODE}" == "prepare" ]]; then
-    ${SYSREPOCTL} --uninstall --module "${MODULE}" || true
-    ${SYSREPOCTL} --install --yang "${YANG_FILE}"
+    ${SYSREPOCTL} --uninstall "${MODULE}" -a || true
+     # not using -a here, because modules with mandatory need startup data first
+    ${SYSREPOCTL} --search-dirs "${YANG_DIR}" --install "${YANG_FILE}"
   elif [[ "${MODE}" == "uninstall" ]]; then
     MODULE_LIST=( "${MODULE}" "${MODULE_LIST[@]}" ) # save for later; uninstall in reverse order
   fi
@@ -54,7 +55,7 @@ fi
       [ -z "${FEATURE}" ] && error "Error: FEATURE requires an argument"
 
       if [[ "${MODE}" == "prepare" ]]; then
-        ${SYSREPOCTL} --module ${MODULE} --feature-enable ${FEATURE}
+        ${SYSREPOCTL} --change ${MODULE} --enable-feature ${FEATURE} -a
       fi
     elif [[ "${1}" == "JSON" || "${1}" == "XML" ]]; then
       FORMAT="${1}"
@@ -66,7 +67,11 @@ fi
           echo "Error: ${FORMAT} data file ${DATA_FILE} does not exist"
           exit 1
         fi
-        ${SYSREPOCFG} -d startup -f "${FORMAT,,}" "${MODULE}" -i "${DATA_FILE}"
+        # If the module is already installed (not just scheduled for installation), then --import should be used. If the
+        # module needs starting data (mandatory nodes), then --new-data should be used (which completes the
+        # installation). Let's just try both the methods and one of them should work
+        ${SYSREPOCFG} --datastore=startup --format="${FORMAT,,}" --module="${MODULE}" --import="${DATA_FILE}" -w || \
+        ${SYSREPOCFG} --datastore=startup --format="${FORMAT,,}" --module="${MODULE}" --new-data="${DATA_FILE}" -w
       fi
     fi
   done
@@ -74,6 +79,6 @@ done
 
 if [[ "${MODE}" == "uninstall" ]]; then
   for module in "${MODULE_LIST[@]}"; do
-    ${SYSREPOCTL} --uninstall --module "${module}"
+    ${SYSREPOCTL} --uninstall "${module}" -a
   done
 fi

@@ -17,9 +17,9 @@ Callback::Callback(std::shared_ptr<lldp::LLDPDataProvider> lldp)
 {
 }
 
-int Callback::dp_get_items(const char* xpath, [[maybe_unused]] ::sysrepo::S_Vals_Holder vals, uint64_t request_id, const char* original_xpath, [[maybe_unused]] void* private_ctx)
+int Callback::oper_get_items(::sysrepo::S_Session session, const char* module_name, const char* xpath, const char* request_xpath, uint32_t request_id, libyang::S_Data_Node& parent, [[maybe_unused]] void* private_data)
 {
-    spdlog::debug("dp_get_items: XPath {} req {} orig-XPath {}", xpath, request_id, original_xpath);
+    spdlog::debug("oper_get_items: XPath {} req {} orig-XPath {}", xpath, request_id, request_xpath);
 
     // when asking for something in the subtree of THIS request
     if (m_lastRequestId == request_id) {
@@ -28,24 +28,18 @@ int Callback::dp_get_items(const char* xpath, [[maybe_unused]] ::sysrepo::S_Vals
     }
     m_lastRequestId = request_id;
 
-    // get number of entries
-    auto neighbors = m_lldp->getNeighbors();
-    size_t allocSize = std::accumulate(neighbors.begin(), neighbors.end(), 0, [](size_t acc, lldp::NeighborEntry elem) { return acc + elem.m_properties.size(); });
-    size_t i = 0;
-    auto out = vals->reallocate(allocSize);
+    libyang::S_Context ctx = session->get_context();
+    libyang::S_Module mod = ctx->get_module(module_name);
 
-    for (const auto& n : neighbors) {
+    parent.reset(new libyang::Data_Node(ctx, "/czechlight-lldp:nbr-list", nullptr, LYD_ANYDATA_CONSTSTRING, 0));
+
+    libyang::S_Data_Node ifc(new libyang::Data_Node(parent, mod, "if-name"));
+
+    for (const auto& n : m_lldp->getNeighbors()) {
+        libyang::S_Data_Node key(new libyang::Data_Node(ifc, mod, "ifName", n.m_portId.c_str()));
+
         for (const auto& [key, val] : n.m_properties) { // garbage properties in, garbage out
-
-            auto srType = SR_STRING_T;
-            if (key == "systemCapabilitiesSupported" || key == "systemCapabilitiesEnabled") {
-                srType = SR_BITS_T;
-            }
-
-            out->val(i++)->set(
-                (std::string(xpath) + "/if-name[ifName='" + n.m_portId + "']/" + key).c_str(),
-                val.c_str(),
-                srType);
+            libyang::S_Data_Node prop(new libyang::Data_Node(ifc, mod, key.c_str(), val.c_str()));
         }
     }
 

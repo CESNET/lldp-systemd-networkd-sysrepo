@@ -19,7 +19,7 @@ namespace lldp::sysrepo {
 class Callback : public ::sysrepo::Callback {
 public:
     explicit Callback(std::shared_ptr<lldp::LLDPDataProvider> lldp);
-    int dp_get_items(const char* xpath, ::sysrepo::S_Vals_Holder vals, uint64_t request_id, const char* original_xpath, void* private_ctx) override;
+    int oper_get_items(::sysrepo::S_Session session, const char* module_name, const char* path, const char* request_xpath, uint32_t request_id, libyang::S_Data_Node& parent, void* private_data) override;
 
 private:
     std::shared_ptr<lldp::LLDPDataProvider> m_lldp;
