@@ -49,7 +49,8 @@ find_package(spdlog REQUIRED)
 find_package(sdbus-c++ REQUIRED)
 find_package(docopt REQUIRED)
 find_package(PkgConfig)
-pkg_check_modules(SYSREPO REQUIRED libSysrepo-cpp>=0.7.3 IMPORTED_TARGET libsysrepo) # we're using both C++ and C APIs
+pkg_check_modules(SYSREPO REQUIRED sysrepo-cpp>=1.4.79 IMPORTED_TARGET sysrepo)
+pkg_check_modules(LIBYANG REQUIRED libyang-cpp>=1.0.190 IMPORTED_TARGET libyang)
 pkg_check_modules(SYSTEMD REQUIRED IMPORTED_TARGET libsystemd)
 
 find_path(SD_LLDP_H systemd/sd-lldp.h PATHS ${SYSTEMD_INCLUDEDIR} NO_DEFAULT_PATH)
@@ -74,7 +75,7 @@ add_library(sysrepo-lldp STATIC
         src/logging.h
         )
 target_link_libraries(sysrepo-lldp
-        PUBLIC spdlog::spdlog SDBusCpp::sdbus-c++ PkgConfig::SYSREPO PkgConfig::SYSTEMD ${STD_FILESYSTEM_LIBRARY}
+        PUBLIC spdlog::spdlog SDBusCpp::sdbus-c++ PkgConfig::SYSREPO PkgConfig::LIBYANG PkgConfig::SYSTEMD ${STD_FILESYSTEM_LIBRARY}
         )
 
 add_executable(lldp-systemd-networkd-sysrepod
