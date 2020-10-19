@@ -20,6 +20,11 @@ if [[ $ZUUL_JOB_NAME =~ .*-clang.* ]]; then
     export CXX=clang++
     export LD=clang
     export CXXFLAGS="-stdlib=libc++"
+    # spdlog passes std::string instances, and it's built against GCC's libstdc++ on the CI
+    sed -i \
+        -e 's/spdlog::spdlog/spdlog::spdlog_header_only/' \
+        -e '/find_package(spdlog/ a add_definitions(-DFMT_HEADER_ONLY)' \
+        ${ZUUL_PROJECT_SRC_DIR}/CMakeLists.txt
 fi
 
 if [[ $ZUUL_JOB_NAME =~ .*-ubsan ]]; then
@@ -32,18 +37,14 @@ if [[ $ZUUL_JOB_NAME =~ .*-asan ]]; then
     export CFLAGS="-fsanitize=address ${CFLAGS}"
     export CXXFLAGS="-fsanitize=address ${CXXFLAGS}"
     export LDFLAGS="-fsanitize=address ${LDFLAGS}"
-
-    if [[ $ZUUL_JOB_NAME =~ f31-.* ]]; then
-        # On Fedora 31, libev's ev_realloc looks fishy for sysrepoctl & sysrepocfg
-        export LSAN_OPTIONS="suppressions=${ZUUL_PROJECT_SRC_DIR}/ci/lsan.supp:print_suppressions=0"
-    fi
 fi
 
 if [[ $ZUUL_JOB_NAME =~ .*-tsan ]]; then
     export CFLAGS="-fsanitize=thread ${CFLAGS}"
     export CXXFLAGS="-fsanitize=thread ${CXXFLAGS}"
     export LDFLAGS="-fsanitize=thread ${LDFLAGS}"
-    export TSAN_OPTIONS="suppressions=$HOME/target/tsan.supp"
+    # upstream reallocates mutex addresses via SHM -> no joy
+    export TSAN_OPTIONS="suppressions=$HOME/target/tsan.supp:detect_deadlocks=0"
 fi
 
 if [[ $ZUUL_JOB_NAME =~ .*-cover.* ]]; then
