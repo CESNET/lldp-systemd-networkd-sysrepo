@@ -1,5 +1,0 @@
-# Fedora 31: sysrepocfg and sysrepoctl binaries
-# Direct leak of 112 byte(s) in 2 object(s) allocated from:
-#  #0 0x7f12a9dc314e in realloc (/lib64/libasan.so.5+0x10e14e)
-#  #1 0x7f12a760bb99 in ev_realloc /usr/src/debug/libev-4.27-1.fc31.x86_64/ev.c:1776
-leak:ev.c
