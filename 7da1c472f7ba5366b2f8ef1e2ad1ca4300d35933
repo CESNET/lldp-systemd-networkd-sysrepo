@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8a03ce26_86f86b64",
+        "filename": "src/callback.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-22T10:34:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81c90623_c4474d26",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "7da1c472f7ba5366b2f8ef1e2ad1ca4300d35933",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34e1e403_d167497b",
         "filename": "src/callback.cpp",
         "patchSetId": 5
@@ -39,6 +63,24 @@
       "revId": "7da1c472f7ba5366b2f8ef1e2ad1ca4300d35933",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07c8c9d5_57af8ae1",
+        "filename": "src/callback.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-10-22T10:34:38Z",
+      "side": 1,
+      "message": "I have replaced those S_ datatypes here, in main(), and in (I\u0027m not really convinced that is was a good idea) the function signature of the callback.",
+      "parentUuid": "34e1e403_d167497b",
+      "revId": "7da1c472f7ba5366b2f8ef1e2ad1ca4300d35933",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     }
   ]
 }
