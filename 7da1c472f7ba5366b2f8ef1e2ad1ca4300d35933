@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81c90623_c4474d26",
+        "filename": "src/callback.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-22T10:00:42Z",
+      "side": 1,
+      "message": "nit: consider using `auto`",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "7da1c472f7ba5366b2f8ef1e2ad1ca4300d35933",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34e1e403_d167497b",
+        "filename": "src/callback.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-22T10:00:42Z",
+      "side": 1,
+      "message": "let\u0027s make this more C++-ish with make_shared, please (also everyhwere else where it\u0027s actually possible)",
+      "revId": "7da1c472f7ba5366b2f8ef1e2ad1ca4300d35933",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
