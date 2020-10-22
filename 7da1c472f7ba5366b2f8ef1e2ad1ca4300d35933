@@ -81,6 +81,24 @@
       "revId": "7da1c472f7ba5366b2f8ef1e2ad1ca4300d35933",
       "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c03de8e8_8c3b15a4",
+        "filename": "src/callback.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-10-22T10:54:07Z",
+      "side": 1,
+      "message": "I don\u0027t care that much about the function signatures -- it was mainly about make_shared, auto, and not using reset() that much. This looks good to me, thanks.",
+      "parentUuid": "07c8c9d5_57af8ae1",
+      "revId": "7da1c472f7ba5366b2f8ef1e2ad1ca4300d35933",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": false
     }
   ]
 }
