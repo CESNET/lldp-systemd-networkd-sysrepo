@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49c5f05a_fc143b55",
+        "filename": "yang/czechlight-lldp.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2020-11-04T16:17:01Z",
+      "side": 0,
+      "message": "From https://tools.ietf.org/html/rfc7950#section-7.8.2:\n\n\u003e The \"key\" statement, which MUST be present if the list represents\n\u003e configuration and MAY be present otherwise\n\nWe do not represent configuration data, right? Did I understand that correctly?\nSo, *this* is the only change (apart from renaming the list to something like neighbors) that I have to do? Just let the list be non-indexed.\n\n [root@image bin]# ./sysrepocfg -X -f json --datastore\u003doperational  | jq \u0027.\"czechlight-lldp:nbr-list\"\u0027\n {\n   \"if-name\": [\n     {\n       \"ifName\": \"host0\",\n       \"remoteChassisId\": \"1efe5cecbfc248a09065ad6177a98b41\",\n       \"remotePortId\": \"vb-image\",\n       \"remoteSysName\": \"enterprise\",\n       \"systemCapabilitiesEnabled\": \"station-only\",\n       \"systemCapabilitiesSupported\": \"bridge router station-only\"\n     },\n     {\n       \"ifName\": \"host0\",\n       \"remoteChassisId\": \"7062a9e41c924ac6942da39c56e6b820\",\n       \"remotePortId\": \"host0\",\n       \"remoteSysName\": \"image2\",\n       \"systemCapabilitiesEnabled\": \"station-only\",\n       \"systemCapabilitiesSupported\": \"bridge router station-only\"\n     }\n   ]\n }",
+      "revId": "ed0194a5da3415d3087182359d6008051d0ae42f",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
