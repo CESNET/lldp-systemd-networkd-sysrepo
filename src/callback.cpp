@@ -34,14 +34,16 @@ int Callback::operator()(std::shared_ptr<::sysrepo::Session> session, const char
     parent = std::make_shared<libyang::Data_Node>(ctx, "/czechlight-lldp:nbr-list", nullptr, LYD_ANYDATA_CONSTSTRING, 0);
 
     for (const auto& n : m_lldp->getNeighbors()) {
-        auto ifc = std::make_shared<libyang::Data_Node>(parent, mod, "if-name");
+        auto ifc = std::make_shared<libyang::Data_Node>(parent, mod, "neighbors");
 
-        auto key = std::make_shared<libyang::Data_Node>(ifc, mod, "ifName", n.m_portId.c_str());
+        auto ifName = std::make_shared<libyang::Data_Node>(ifc, mod, "ifName", n.m_portId.c_str());
 
         for (const auto& [key, val] : n.m_properties) { // garbage properties in, garbage out
             auto prop = std::make_shared<libyang::Data_Node>(ifc, mod, key.c_str(), val.c_str());
         }
     }
+
+    spdlog::trace("Pushing to sysrepo (JSON): {}", parent->print_mem(LYD_FORMAT::LYD_JSON, 0));
 
     return SR_ERR_OK;
 }
