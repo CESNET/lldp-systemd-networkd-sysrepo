@@ -43,6 +43,8 @@ int Callback::operator()(std::shared_ptr<::sysrepo::Session> session, const char
         }
     }
 
+    spdlog::trace("Pushing to sysrepo (JSON): {}", parent->print_mem(LYD_FORMAT::LYD_JSON, 0));
+
     return SR_ERR_OK;
 }
 

@@ -59,6 +59,13 @@ TEST_CASE("Sysrepo opsdata callback")
         };
     }
 
+    SECTION("Multiple neighbors")
+    {
+        lldpDirectory = CMAKE_CURRENT_SOURCE_DIR "/tests/files/multiple-neighbors";
+        links = {{1, "host0"}};
+        expected = {};
+    }
+
     auto lldp = std::make_shared<lldp::lldp::LLDPDataProvider>(lldpDirectory, sdbus::createSessionBusConnection(), serverBus);
     srSubs->oper_get_items_subscribe("czechlight-lldp", lldp::sysrepo::Callback(lldp), "/czechlight-lldp:nbr-list");
 
