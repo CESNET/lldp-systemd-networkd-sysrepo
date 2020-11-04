@@ -33,9 +33,9 @@ int Callback::operator()(std::shared_ptr<::sysrepo::Session> session, const char
 
     parent = std::make_shared<libyang::Data_Node>(ctx, "/czechlight-lldp:nbr-list", nullptr, LYD_ANYDATA_CONSTSTRING, 0);
 
-    auto ifc = std::make_shared<libyang::Data_Node>(parent, mod, "if-name");
-
     for (const auto& n : m_lldp->getNeighbors()) {
+        auto ifc = std::make_shared<libyang::Data_Node>(parent, mod, "if-name");
+
         auto key = std::make_shared<libyang::Data_Node>(ifc, mod, "ifName", n.m_portId.c_str());
 
         for (const auto& [key, val] : n.m_properties) { // garbage properties in, garbage out
