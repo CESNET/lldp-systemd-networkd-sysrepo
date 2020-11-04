@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9926a9d_65fed656",
+        "filename": "tests/sysrepo-opsdata.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-11-04T13:54:35Z",
+      "side": 1,
+      "message": "nit: singular \"neighbour\"",
+      "range": {
+        "startLine": 40,
+        "startChar": 31,
+        "endLine": 40,
+        "endChar": 41
+      },
+      "revId": "ab2306ff69ddb6a07f559acbbced05bf9db33b00",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68",
+      "unresolved": true
+    }
+  ]
+}
