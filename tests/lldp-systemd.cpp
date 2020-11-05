@@ -70,6 +70,28 @@ TEST_CASE("Parsing with the mock")
         };
     }
 
+    SECTION("Multiple neighbors on one interface")
+    {
+        links = {{1, "host0"}};
+        dataDir = "multiple-neighbors";
+        expected = {
+            {"host0", {
+                          {"remoteSysName", "image"},
+                          {"remotePortId", "host0"},
+                          {"remoteChassisId", "1631331c24bb499bb644fcdf7c9fd467"},
+                          {"systemCapabilitiesSupported", "bridge router station-only"},
+                          {"systemCapabilitiesEnabled", "station-only"},
+                      }},
+            {"host0", {
+                          {"remoteSysName", "enterprise"},
+                          {"remotePortId", "vb-image2"},
+                          {"remoteChassisId", "1efe5cecbfc248a09065ad6177a98b41"},
+                          {"systemCapabilitiesSupported", "bridge router station-only"},
+                          {"systemCapabilitiesEnabled", "station-only"},
+                      }},
+        };
+    }
+
     auto dbusServer = DbusServer(*dbusServerConnection);
     dbusServer.setLinks(links); // intentionally not mocking DbusMockServer::ListLinks but using explicit set/get pattern so I can avoid an unneccesary dependency on trompeloeil
 

@@ -92,7 +92,7 @@ install(TARGETS
         RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/)
 
 install(FILES
-        yang/czechlight-lldp.yang
+        yang/czechlight-lldp@2020-11-04.yang
         yang/iana-afn-safi@2013-07-04.yang
         yang/ietf-inet-types@2013-07-15.yang
         DESTINATION ${CMAKE_INSTALL_PREFIX}/share/lldp-systemd-networkd-sysrepo/yang
@@ -159,7 +159,7 @@ if(BUILD_TESTING)
     endfunction()
 
     lldp_test(sysrepo-opsdata)
-    sysrepo_fixture_env(sysrepo YANG ${CMAKE_CURRENT_SOURCE_DIR}/yang/czechlight-lldp.yang)
+    sysrepo_fixture_env(sysrepo YANG ${CMAKE_CURRENT_SOURCE_DIR}/yang/czechlight-lldp@2020-11-04.yang)
     set_tests_properties(
             test_sysrepo-opsdata
             PROPERTIES FIXTURES_REQUIRED sysrepo:env:sysrepo
