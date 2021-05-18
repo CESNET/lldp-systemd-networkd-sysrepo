@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "228eb0df_fbc9b509",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2021-05-18T09:35:00Z",
+      "side": 1,
+      "message": "recheck\n\nI wonder why there was no vote from the CzechLight-internal project...",
+      "revId": "6d79dede96f720b77aa5bf132e7f16787002f6ce",
+      "serverId": "e32f8df8-3db0-4f76-a6c6-fe9d6e69dd68"
+    }
+  ]
+}
