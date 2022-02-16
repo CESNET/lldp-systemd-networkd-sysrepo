@@ -1,6 +1,0 @@
-- hosts: all
-  tasks:
-    - name: install systemd's build deps
-      shell:
-        cmd: dnf -y builddep systemd
-      become: true
